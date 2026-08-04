@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Empréstimos | ERP Crédito</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/emprestimos.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li onclick="location.href='dashboard.html'">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </li>
+
+                <li onclick="location.href='clientes.html'">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Clientes
+
+                </li>
+
+                <li onclick="location.href='parceiros.html'">
+
+                    <i class="fa-solid fa-handshake"></i>
+
+                    Parceiros
+
+                </li>
+
+                <li class="active">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Empréstimos
+
+                </li>
+
+                <li onclick="location.href='recebimentos.html'">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Recebimentos
+
+                </li>
+
+                <li onclick="location.href='caixa.html'">
+
+                    <i class="fa-solid fa-cash-register"></i>
+
+                    Caixa
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <header class="topbar">
+
+            <div class="top-left">
+
+                <h1>Empréstimos</h1>
+
+                <span>Gerenciamento completo dos contratos de empréstimo</span>
+
+            </div>
+
+            <div class="top-right">
+
+                <div class="search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="pesquisaEmprestimo"
+                        placeholder="Pesquisar contrato...">
+
+                </div>
+
+                <button class="btnNovo">
+
+                    <i class="fa-solid fa-file-circle-plus"></i>
+
+                    Novo Empréstimo
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- CARDS -->
+
+        <section class="cards-emprestimos">
+
+            <div class="cardEmprestimo azul">
+
+    <i class="fa-solid fa-money-bill-transfer"></i>
+
+    <div>
+
+        <span>Total Emprestado</span>
+
+        <h2 id="cardTotalEmprestado">R$ 0,00</h2>
+
+    </div>
+
+</div>
+
+            <div class="cardEmprestimo verde">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <div>
+
+                    <span>Contratos Ativos</span>
+
+                    <h2 id="cardContratosAtivos">0</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardEmprestimo vermelho">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <div>
+
+                    <span>Em Atraso</span>
+
+                    <h2 id="cardContratosAtraso">0</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardEmprestimo roxo">
+
+                <i class="fa-solid fa-sack-dollar"></i>
+
+                <div>
+
+                    <span>Valor a Receber</span>
+
+                    <h2 id="cardValorReceber">R$ 0,00</h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- BARRA -->
+
+        <section class="barra-acoes">
+
+            <div class="acoes-esquerda">
+
+                <button class="btnAzul">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Novo Empréstimo
+
+                </button>
+
+                <button class="btnVerde" id="btnExportarEmprestimos">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    Exportar
+
+                </button>
+
+                <button class="btnCinza" id="btnImprimirEmprestimos">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Imprimir
+
+                </button>
+
+                <button class="btnRoxo" id="btnComissaoLote" title="Define a comissão do parceiro apenas nos contratos que ainda não têm esse valor definido">
+
+                    <i class="fa-solid fa-percent"></i>
+
+                    Definir Comissão em Lote
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- TABELA -->
+
+        <section class="tabela-emprestimos">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Contrato</th>
+                        <th>Data Contrato</th>
+                        <th>Cliente</th>
+                        <th>Parceiro</th>
+                        <th>Valor Emprestado</th>
+                        <th>Saldo Devedor</th>
+                        <th>Juros do Mês</th>
+                        <th>Próx. Vencimento</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaEmprestimos">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- PAGINAÇÃO -->
+
+        <div class="paginacao">
+
+            <button>&laquo;</button>
+
+            <button class="ativo">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button>&raquo;</button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- MODAL NOVO EMPRÉSTIMO -->
+
+<div class="modal" id="modalEmprestimo">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Novo Empréstimo</h2>
+
+            <button class="fechar">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="formEmprestimo">
+
+            <div class="grid-form">
+
+                <div class="campo">
+
+<label>Cliente</label>
+
+<div class="campo-com-botao">
+
+<select id="cliente">
+
+<option value="">
+Selecione...
+</option>
+
+</select>
+
+
+<button 
+type="button"
+class="btnNovoCadastro"
+id="novoCliente">
+
++
+Novo Cliente
+
+</button>
+
+
+</div>
+
+</div>
+
+ <div class="campo">
+
+<label>Parceiro</label>
+
+
+<div class="campo-com-botao">
+
+
+<select id="parceiro">
+
+<option value="">
+Selecione...
+</option>
+
+</select>
+
+
+
+<button 
+type="button"
+class="btnNovoCadastro"
+id="novoParceiro">
+
++
+Novo Parceiro
+
+</button>
+
+
+</div>
+
+
+</div>
+
+                <div class="campo">
+
+                    <label>Valor Emprestado</label>
+
+                    <input type="number" id="valor" step="0.01" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Taxa de Juros (%)</label>
+
+                    <input type="number" id="juros" step="0.01" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Comissão do Parceiro (%)</label>
+
+                    <input type="number" id="comissaoParceiroEmprestimo" step="0.01" placeholder="Ex: 10 (dos 30% de juros)">
+
+                    <small>Quantos pontos percentuais dos juros ficam com o parceiro (o restante fica com o dono). Pode variar por contrato.</small>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Tipo de Juros</label>
+
+                    <select id="tipoJuros">
+
+                        <option>Simples</option>
+
+                        <option>Composto</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Número de Parcelas</label>
+
+                    <input type="number" id="parcelas" min="1" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Periodicidade</label>
+
+                    <select id="periodicidade">
+
+                        <option>Diário</option>
+                        <option>Semanal</option>
+                        <option>Quinzenal</option>
+                        <option>Mensal</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data do Contrato</label>
+
+                    <input type="date" id="dataContrato">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Primeiro Vencimento</label>
+
+                    <input type="date" id="primeiroVencimento">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Status</label>
+
+                    <select id="status">
+
+                        <option>Ativo</option>
+                        <option>Quitado</option>
+                        <option>Finalizado</option>
+                        <option>Em Atraso</option>
+                        <option>Renegociado</option>
+                        <option>Cancelado</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo campo-full">
+
+                    <label>Observações</label>
+
+                    <textarea
+    id="observacoes"
+    rows="4">
+</textarea>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btnCinza" id="btnCancelarEmprestimo">
+
+                    Cancelar
+
+                </button>
+
+                <button type="submit" class="btnAzul">
+
+                    Salvar Empréstimo
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- MODAL NOVO CLIENTE -->
+
+<div id="modalCliente" class="modal">
+
+
+<div class="modal-conteudo">
+
+
+<div class="modal-header">
+
+<h3>
+Novo Cliente
+</h3>
+
+
+<span class="fecharCliente">
+×
+</span>
+
+
+</div>
+
+
+
+<div class="modal-body">
+
+
+<label>
+Nome
+</label>
+
+<input 
+id="nomeCliente"
+type="text"
+placeholder="Nome completo">
+
+
+
+<label>
+CPF
+</label>
+
+<input 
+id="cpfCliente"
+type="text"
+placeholder="CPF">
+
+
+
+<label>
+Telefone
+</label>
+
+<input 
+id="telefoneCliente"
+type="text"
+placeholder="Telefone">
+
+
+
+<label>
+Endereço
+</label>
+
+<textarea
+id="enderecoCliente"
+placeholder="Endereço">
+</textarea>
+
+
+
+<button 
+type="button"
+class="btnSalvar"
+id="salvarCliente">
+
+Salvar Cliente
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- MODAL NOVO PARCEIRO -->
+
+
+<div id="modalParceiro" class="modal">
+
+
+<div class="modal-conteudo">
+
+
+<div class="modal-header">
+
+
+<h3>
+Novo Parceiro
+</h3>
+
+
+<span class="fecharParceiro">
+×
+</span>
+
+
+</div>
+
+
+
+<div class="modal-body">
+
+
+<label>
+Nome
+</label>
+
+<input 
+id="nomeParceiro"
+type="text"
+placeholder="Nome do parceiro">
+
+
+
+<label>
+Documento
+</label>
+
+<input 
+id="documentoParceiro"
+type="text"
+placeholder="CPF/CNPJ">
+
+
+
+<label>
+Telefone
+</label>
+
+<input 
+id="telefoneParceiro"
+type="text"
+placeholder="Telefone">
+
+
+
+<label>
+Capital disponível
+</label>
+
+<input
+id="capitalParceiro"
+type="number"
+placeholder="Valor disponível">
+
+
+
+<label>
+Comissão (%)
+</label>
+
+<input
+id="comissaoParceiroRapido"
+type="number"
+step="0.01"
+placeholder="Comissão do parceiro">
+
+
+
+<button
+type="button"
+class="btnSalvar"
+id="salvarParceiro">
+
+Salvar Parceiro
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","emprestimos.js"]);</script>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+# Ferramentas locais de desenvolvimento (não fazem parte do site)
+.claude/
+
+# Pastas antigas de planejamento, vazias, não usadas
+backend/
+/backup/
+
+# Arquivo estranho salvo na raiz por engano (não é parte do projeto)
+6a63b9e5-0748-83e9-b194-eac18c76e5d9.htm

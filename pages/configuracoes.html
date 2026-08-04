@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ERP Crédito - Configurações</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/configuracoes.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li>
+                    <a href="../index.html">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="clientes.html">
+                        <i class="fa-solid fa-users"></i>
+                        Clientes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="parceiros.html">
+                        <i class="fa-solid fa-handshake"></i>
+                        Parceiros
+                    </a>
+                </li>
+
+                <li>
+                    <a href="emprestimos.html">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                        Empréstimos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="recebimentos.html">
+                        <i class="fa-solid fa-wallet"></i>
+                        Recebimentos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="caixa.html">
+                        <i class="fa-solid fa-cash-register"></i>
+                        Caixa
+                    </a>
+                </li>
+
+                <li>
+                    <a href="relatorios.html">
+                        <i class="fa-solid fa-chart-column"></i>
+                        Relatórios
+                    </a>
+                </li>
+
+                <li class="ativo">
+                    <a href="configuracoes.html">
+                        <i class="fa-solid fa-gears"></i>
+                        Configurações
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- CONTEÚDO -->
+    <!-- ========================= -->
+
+    <main class="content">
+
+        <!-- TOPO -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Configurações</h1>
+
+                <span>
+                    Cadastre as informações da empresa e personalize o ERP.
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- ========================= -->
+        <!-- DADOS DA EMPRESA -->
+        <!-- ========================= -->
+
+        <section class="cardConfiguracao">
+
+            <div class="tituloCard">
+
+                <i class="fa-solid fa-building"></i>
+
+                <h2>Dados da Empresa</h2>
+
+            </div>
+
+            <div class="gridFormulario">
+
+                <div class="campo">
+
+                    <label>Razão Social</label>
+
+                    <input
+                        type="text"
+                        id="razaoSocial"
+                        placeholder="Razão Social">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Nome Fantasia</label>
+
+                    <input
+                        type="text"
+                        id="nomeFantasia"
+                        placeholder="Nome Fantasia">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>CNPJ</label>
+
+                    <input
+                        type="text"
+                        id="cnpj"
+                        placeholder="00.000.000/0000-00">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Inscrição Estadual</label>
+
+                    <input
+                        type="text"
+                        id="inscricao">
+
+                </div>
+
+                <div class="campo campoGrande">
+
+                    <label>Endereço</label>
+
+                    <input
+                        type="text"
+                        id="endereco">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Número</label>
+
+                    <input
+                        type="text"
+                        id="numero">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Bairro</label>
+
+                    <input
+                        type="text"
+                        id="bairro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Cidade</label>
+
+                    <input
+                        type="text"
+                        id="cidade">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Estado</label>
+
+                    <input
+                        type="text"
+                        id="estado">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>CEP</label>
+
+                    <input
+                        type="text"
+                        id="cep">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Telefone</label>
+
+                    <input
+                        type="text"
+                        id="telefone">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>WhatsApp</label>
+
+                    <input
+                        type="text"
+                        id="whatsapp">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>E-mail</label>
+
+                    <input
+                        type="email"
+                        id="email">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Site</label>
+
+                    <input
+                        type="text"
+                        id="site">
+
+                </div>
+
+            </div>
+
+        </section>
+                <!-- ========================= -->
+        <!-- CONFIGURAÇÕES FINANCEIRAS -->
+        <!-- ========================= -->
+
+        <section class="cardConfiguracao">
+
+            <div class="tituloCard">
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                <h2>Configurações Financeiras</h2>
+
+            </div>
+
+            <div class="gridFormulario">
+
+                <div class="campo">
+
+                    <label>Juros Padrão (%)</label>
+
+                    <input
+                        type="number"
+                        id="jurosPadrao"
+                        step="0.01">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Multa por Atraso (%)</label>
+
+                    <input
+                        type="number"
+                        id="multa"
+                        step="0.01">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Juros de Mora (% ao dia)</label>
+
+                    <input
+                        type="number"
+                        id="mora"
+                        step="0.01">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Carência (dias)</label>
+
+                    <input
+                        type="number"
+                        id="carencia">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Valor Mínimo do Empréstimo</label>
+
+                    <input
+                        type="number"
+                        id="valorMinimo"
+                        step="0.01">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Valor Máximo do Empréstimo</label>
+
+                    <input
+                        type="number"
+                        id="valorMaximo"
+                        step="0.01">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- APARÊNCIA -->
+        <!-- ========================= -->
+
+        <section class="cardConfiguracao">
+
+            <div class="tituloCard">
+
+                <i class="fa-solid fa-palette"></i>
+
+                <h2>Aparência</h2>
+
+            </div>
+
+            <div class="gridFormulario">
+
+                <div class="campo">
+
+                    <label>Nome exibido no sistema</label>
+
+                    <input
+                        type="text"
+                        id="nomeSistema">
+
+                </div>
+
+                <div class="campo campoGrande">
+
+                    <label>Logo da Empresa</label>
+
+                    <input
+                        type="file"
+                        id="logoEmpresa"
+                        accept="image/*">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- SEGURANÇA -->
+        <!-- ========================= -->
+
+        <section class="cardConfiguracao">
+
+            <div class="tituloCard">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <h2>Segurança</h2>
+
+            </div>
+
+            <div class="gridFormulario">
+
+                <div class="campo">
+
+                    <label>Tempo de Sessão (minutos)</label>
+
+                    <input
+                        type="number"
+                        id="tempoSessao"
+                        value="30">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Nova Senha do Administrador</label>
+
+                    <input
+                        type="password"
+                        id="novaSenha">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Confirmar Nova Senha</label>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- INFORMAÇÕES -->
+        <!-- ========================= -->
+
+        <section class="cardConfiguracao">
+
+            <div class="tituloCard">
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                <h2>Sincronização com a Nuvem</h2>
+
+            </div>
+
+            <p style="color:#6b7280; margin:0 0 16px;">
+                Use "Enviar" a primeira vez, no computador que já tem os seus dados reais, pra levar tudo pra nuvem.
+                Depois disso, os dados sincronizam sozinhos entre os aparelhos — use "Buscar" só se quiser forçar uma atualização na hora.
+            </p>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+
+                <button type="button" id="btnEnviarNuvem" class="btnSalvar">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    Enviar meus dados para a nuvem agora
+                </button>
+
+                <button type="button" id="btnBuscarNuvem" class="btnCancelar">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                    Buscar dados da nuvem agora
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="cardConfiguracao">
+
+            <div class="tituloCard">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <h2>Informações do Sistema</h2>
+
+            </div>
+
+            <div class="gridFormulario">
+
+                <div class="campo">
+
+                    <label>Versão</label>
+
+                    <input
+                        type="text"
+                        value="ERP Crédito 1.0"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Desenvolvedor</label>
+
+                    <input
+                        type="text"
+                        value="Dara Freitas"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Última Atualização</label>
+
+                    <input
+                        type="text"
+                        value="Julho/2026"
+                        readonly>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- BOTÕES -->
+        <!-- ========================= -->
+
+        <section class="acoesConfiguracao">
+
+            <button id="btnSalvar" class="btnSalvar">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Salvar
+
+            </button>
+
+            <button id="btnRestaurar" class="btnSecundario">
+
+                <i class="fa-solid fa-rotate-left"></i>
+
+                Restaurar Padrões
+
+            </button>
+
+            <button id="btnCancelar" class="btnCancelar">
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Cancelar
+
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","configuracoes.js"]);</script>
+
+</body>
+
+</html>

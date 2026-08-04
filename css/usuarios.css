@@ -1,0 +1,899 @@
+/* =====================================================
+   USUÁRIOS - ERP CRÉDITO
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+    padding:30px;
+
+    background:#f5f7fb;
+
+    min-height:100vh;
+
+}
+
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+
+.top-left h1{
+
+    font-size:28px;
+
+    color:#1f2937;
+
+    margin-bottom:5px;
+
+}
+
+
+.top-left span{
+
+    color:#6b7280;
+
+    font-size:14px;
+
+}
+
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+
+.search{
+
+    position:relative;
+
+}
+
+
+.search input{
+
+    width:300px;
+
+    height:42px;
+
+    padding-left:40px;
+
+    border-radius:8px;
+
+    border:1px solid #d1d5db;
+
+    outline:none;
+
+}
+
+
+.search input:focus{
+
+    border-color:#2563eb;
+
+}
+
+
+.search i{
+
+    position:absolute;
+
+    left:14px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#9ca3af;
+
+}
+
+
+
+/* =====================================================
+   BOTÃO NOVO
+===================================================== */
+
+.btnNovo{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+.btnNovo:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+/* =====================================================
+   CARDS USUÁRIOS
+===================================================== */
+
+
+.cardsUsuarios{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.cardUsuario{
+
+    background:#fff;
+
+    padding:22px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.07);
+
+    transition:.3s;
+
+}
+
+
+.cardUsuario:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+.cardUsuario i{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:25px;
+
+    color:white;
+
+}
+
+
+
+.cardUsuario span{
+
+    color:#6b7280;
+
+    font-size:14px;
+
+}
+
+
+
+.cardUsuario h2{
+
+    margin-top:5px;
+
+    color:#111827;
+
+    font-size:26px;
+
+}
+
+
+
+/* CORES DOS CARDS */
+
+
+.cardUsuario.azul i{
+
+    background:#2563eb;
+
+}
+
+
+.cardUsuario.verde i{
+
+    background:#16a34a;
+
+}
+
+
+.cardUsuario.roxo i{
+
+    background:#7c3aed;
+
+}
+
+
+.cardUsuario.laranja i{
+
+    background:#ea580c;
+
+}
+
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+
+.filtrosUsuarios{
+
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+
+}
+
+
+
+.filtrosUsuarios .campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    width:220px;
+
+}
+
+
+
+.filtrosUsuarios label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.filtrosUsuarios select{
+
+    height:42px;
+
+    border-radius:8px;
+
+    border:1px solid #d1d5db;
+
+    padding:0 12px;
+
+}
+
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+
+.tabelaUsuarios{
+
+    background:#fff;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+
+}
+
+
+
+.tabelaUsuarios table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.tabelaUsuarios thead{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+
+
+.tabelaUsuarios th{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:16px;
+
+    text-align:left;
+
+    font-size:14px;
+
+}
+
+
+
+.tabelaUsuarios td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+
+    font-size:14px;
+
+}
+
+
+
+.tabelaUsuarios tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+/* =====================================================
+   STATUS
+===================================================== */
+
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+
+.status.ativo{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+
+
+.status.inativo{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+
+/* =====================================================
+   BOTÕES DE AÇÃO
+===================================================== */
+
+
+.acao{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    margin-right:5px;
+
+    transition:.3s;
+
+}
+
+
+
+.acao.visualizar{
+
+    background:#2563eb;
+
+}
+
+
+
+.acao.visualizar:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+.acao.editar{
+
+    background:#f59e0b;
+
+}
+
+
+
+.acao.editar:hover{
+
+    background:#d97706;
+
+}
+
+
+
+.acao.excluir{
+
+    background:#dc2626;
+
+}
+
+
+
+.acao.excluir:hover{
+
+    background:#b91c1c;
+
+}
+
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+}
+
+
+
+.modal-content{
+
+    width:95%;
+
+    max-width:750px;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+}
+
+
+
+.modal-header{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:20px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.modal-header h2{
+
+    font-size:21px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+
+.fechar{
+
+    border:none;
+
+    background:none;
+
+    color:#fff;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
+
+.gridFormulario{
+
+    padding:25px;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.campo label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#374151;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.campo input,
+
+.campo select{
+
+    height:42px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:8px;
+
+    padding:0 12px;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+
+
+.campo input:focus,
+
+.campo select:focus{
+
+    border-color:#2563eb;
+
+}
+
+
+
+.campo-full{
+
+    grid-column:1/-1;
+
+}
+
+
+
+/* =====================================================
+   RODAPÉ MODAL
+===================================================== */
+
+
+.modal-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    padding:20px 25px;
+
+    border-top:1px solid #e5e7eb;
+
+}
+
+
+
+.btnSalvar,
+
+.btnCancelar{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+
+.btnSalvar{
+
+    background:#16a34a;
+
+}
+
+
+
+.btnSalvar:hover{
+
+    background:#15803d;
+
+}
+
+
+
+.btnCancelar{
+
+    background:#dc2626;
+
+}
+
+
+
+.btnCancelar:hover{
+
+    background:#b91c1c;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+
+@media(max-width:1000px){
+
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+
+
+    .top-right{
+
+        width:100%;
+
+    }
+
+
+
+    .search input{
+
+        width:100%;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .content{
+
+        padding:15px;
+
+    }
+
+
+
+    .filtrosUsuarios{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .filtrosUsuarios .campo{
+
+        width:100%;
+
+    }
+
+
+
+    .gridFormulario{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .modal-content{
+
+        width:95%;
+
+        max-height:90vh;
+
+        overflow-y:auto;
+
+    }
+
+
+
+    .modal-footer{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .modal-footer button{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+
+
+    .tabelaUsuarios{
+
+        overflow-x:auto;
+
+    }
+
+
+
+    .tabelaUsuarios table{
+
+        min-width:850px;
+
+    }
+
+
+}

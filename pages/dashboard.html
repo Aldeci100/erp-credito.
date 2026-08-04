@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | ERP Crédito</title>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU -->
+
+    <div id="menu"></div>
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <!-- TOPO -->
+
+        <div id="topbar"></div>
+
+        <!-- FILTRO DE MÊS (afeta os cards "no Mês") -->
+
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; background:#fff; padding:16px 22px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08); border:2px solid #2563eb;">
+
+            <i class="fa-solid fa-calendar-days" style="font-size:22px; color:#2563eb;"></i>
+
+            <label for="filtroMesDashboard" style="font-weight:700; color:#1f2937; font-size:17px;">
+                Ver valores "no Mês" de:
+            </label>
+
+            <input type="month" id="filtroMesDashboard" style="font-size:17px; font-weight:600; padding:8px 14px; border:2px solid #2563eb; border-radius:8px; color:#1e3a8a; cursor:pointer;">
+
+        </div>
+
+        <!-- CARDS -->
+
+        <section class="cards">
+
+            <div class="card azul">
+
+                <div>
+
+                    <h3>Total de Clientes</h3>
+
+                    <h2 id="cardClientes">0</h2>
+
+                </div>
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <div class="card verde">
+
+                <div>
+
+                    <h3>Parceiros</h3>
+
+                    <h2 id="cardParceiros">0</h2>
+
+                </div>
+
+                <i class="fa-solid fa-handshake"></i>
+
+            </div>
+
+            <div class="card roxo">
+
+                <div>
+
+                    <h3>Capital Emprestado</h3>
+
+                    <h2 id="cardCapital">R$ 0,00</h2>
+
+                </div>
+
+                <i class="fa-solid fa-sack-dollar"></i>
+
+            </div>
+
+            <div class="card azul">
+
+    <div>
+
+        <h3>Capital em Aberto</h3>
+
+        <h2 id="cardCapitalAberto">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-wallet"></i>
+
+</div>
+
+            <div class="card laranja">
+
+                <div>
+
+                    <h3>Receber Hoje</h3>
+
+                    <h2 id="cardReceberHoje">R$ 0,00</h2>
+
+                </div>
+
+                <i class="fa-solid fa-calendar-day"></i>
+
+            </div>
+
+            <div class="card verde">
+
+    <div>
+
+        <h3>Recebido no Mês</h3>
+
+        <h2 id="cardRecebidoMes">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-money-bill-trend-up"></i>
+
+</div>
+
+            <div class="card laranja">
+
+    <div>
+
+        <h3>Juros Recebidos no Mês</h3>
+
+        <h2 id="cardJurosRecebidoMes">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-percent"></i>
+
+</div>
+
+            <div class="card azul">
+
+    <div>
+
+        <h3>Capital Recebido no Mês</h3>
+
+        <h2 id="cardCapitalRecebidoMes">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-hand-holding-dollar"></i>
+
+</div>
+
+            <div class="card laranja" title="Sua parte dos juros (já descontada a comissão dos parceiros) das parcelas com vencimento neste mês que ainda não foram recebidas">
+
+    <div>
+
+        <h3>Juros a Receber no Mês (Dono)</h3>
+
+        <h2 id="cardJurosAReceberMes">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-hourglass-half"></i>
+
+</div>
+
+            <div class="card roxo clicavel" onclick="location.href='parceiros.html'" title="Soma das comissões de todos os parceiros que ainda não foram dadas baixa (pendentes + atrasadas)">
+
+    <div>
+
+        <h3>Comissão a Pagar aos Parceiros</h3>
+
+        <h2 id="cardComissaoParceiros">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-handshake"></i>
+
+</div>
+
+            <div class="card vermelho clicavel" onclick="location.href='recebimentos.html?filtro=atrasados'" title="Ver contratos em atraso">
+
+    <div>
+
+        <h3>Contratos em Atraso</h3>
+
+        <h2 id="cardContratosAtrasados">0</h2>
+
+    </div>
+
+    <i class="fa-solid fa-triangle-exclamation"></i>
+
+</div>
+
+<div class="card vermelho clicavel" onclick="location.href='recebimentos.html?filtro=atrasados'" title="Ver parcelas vencidas">
+
+    <div>
+
+        <h3>Parcelas Vencidas</h3>
+
+        <h2 id="cardAtrasados">0</h2>
+
+    </div>
+
+    <i class="fa-solid fa-file-circle-exclamation"></i>
+
+</div>
+
+
+            <div class="card roxo">
+
+    <div>
+
+        <h3>Contratos Ativos</h3>
+
+        <h2 id="cardContratosAtivos">0</h2>
+
+    </div>
+
+    <i class="fa-solid fa-file-signature"></i>
+
+</div>
+
+        </section>
+
+        <!-- JUROS POR PARCEIRO NO MÊS -->
+
+        <section class="panel grande" style="margin-bottom:25px;">
+
+            <h2>
+                <i class="fa-solid fa-users-line"></i>
+                Juros do Mês por Parceiro
+            </h2>
+
+            <div style="overflow-x:auto;">
+
+                <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+
+                    <thead>
+
+                        <tr>
+                            <th style="padding:10px; text-align:left; background:#1e3a8a; color:#fff;">Parceiro</th>
+                            <th style="padding:10px; text-align:right; background:#1e3a8a; color:#fff;">Juros Total a Receber no Mês</th>
+                            <th style="padding:10px; text-align:right; background:#1e3a8a; color:#fff;">Juros do Dono</th>
+                            <th style="padding:10px; text-align:right; background:#1e3a8a; color:#fff;">Juros do Parceiro</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="listaJurosPorParceiro">
+
+                    </tbody>
+
+                    <tfoot>
+
+                        <tr style="font-weight:bold; border-top:2px solid #1e3a8a;">
+                            <td style="padding:10px;">Total geral</td>
+                            <td style="padding:10px; text-align:right;" id="totalJurosPorParceiroTotal">R$ 0,00</td>
+                            <td style="padding:10px; text-align:right;" id="totalJurosPorParceiroDono">R$ 0,00</td>
+                            <td style="padding:10px; text-align:right;" id="totalJurosPorParceiroParceiro">R$ 0,00</td>
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- PAINEL -->
+
+        <section class="dashboard-grid">
+
+            <div class="panel grande">
+
+    <h2>Capital Emprestado x Capital Recebido</h2>
+
+   <div style="height:320px;">
+    <canvas id="graficoFinanceiro"></canvas>
+</div>
+
+</div>
+
+            <div class="panel grande">
+
+                <h2>Últimos Empréstimos</h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Contrato</th>
+
+                            <th>Cliente</th>
+
+                            <th>Valor</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    
+                    <tbody id="listaUltimosEmprestimos"></tbody>
+
+                </table>
+
+            </div>
+
+            <div class="panel pequeno">
+
+                <h2>Resumo</h2>
+
+                <div class="info">
+
+    <p>Recebido Hoje</p>
+
+    <strong id="resumoRecebidoHoje">R$ 0,00</strong>
+
+</div>
+
+<div class="info">
+
+    <p>Receber Amanhã</p>
+
+    <strong id="resumoReceberAmanha">R$ 0,00</strong>
+
+</div>
+
+<div class="info">
+
+    <p>Contratos em Atraso</p>
+
+    <strong id="resumoContratosAtraso">0</strong>
+
+</div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","dashboard.js"]);</script>
+
+</body>
+
+</html>

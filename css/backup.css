@@ -1,0 +1,754 @@
+/* =====================================================
+   BACKUP - ERP CRÉDITO
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+    padding:30px;
+
+    background:#f5f7fb;
+
+    min-height:100vh;
+
+}
+
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topbar{
+
+    margin-bottom:30px;
+
+}
+
+
+.top-left h1{
+
+    font-size:28px;
+
+    color:#1f2937;
+
+    margin-bottom:6px;
+
+}
+
+
+.top-left span{
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+
+
+/* =====================================================
+   CARDS BACKUP
+===================================================== */
+
+
+.cardsBackup{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:22px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.cardBackup{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+
+
+.cardBackup:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+.cardBackup i{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+}
+
+
+
+.cardBackup span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+
+
+.cardBackup h2{
+
+    margin-top:5px;
+
+    color:#111827;
+
+    font-size:25px;
+
+}
+
+
+
+/* CORES */
+
+
+.cardBackup.azul i{
+
+    background:#2563eb;
+
+}
+
+
+
+.cardBackup.verde i{
+
+    background:#16a34a;
+
+}
+
+
+
+.cardBackup.roxo i{
+
+    background:#7c3aed;
+
+}
+
+
+
+/* =====================================================
+   ÁREA DE GERENCIAMENTO
+===================================================== */
+
+
+.cardBackupArea{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:14px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.07);
+
+}
+
+
+
+.tituloBackup{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+    padding-bottom:15px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+
+
+.tituloBackup i{
+
+    color:#2563eb;
+
+    font-size:22px;
+
+}
+
+
+
+.tituloBackup h2{
+
+    color:#1f2937;
+
+    font-size:20px;
+
+}
+
+
+
+/* =====================================================
+   AÇÕES BACKUP
+===================================================== */
+
+
+.acoesBackup{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.acaoBackup{
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+
+
+.acaoBackup > i{
+
+    font-size:40px;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.acaoBackup h3{
+
+    color:#1f2937;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.acaoBackup p{
+
+    color:#64748b;
+
+    font-size:14px;
+
+    min-height:45px;
+
+    margin-bottom:18px;
+
+}
+
+
+
+.acaoBackup input[type="file"]{
+
+    width:100%;
+
+    margin-bottom:15px;
+
+    padding:8px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:8px;
+
+}
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+
+.btnAzul,
+.btnVerde,
+.btnVermelho{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    transition:.3s;
+
+}
+
+
+
+.btnAzul{
+
+    background:#2563eb;
+
+}
+
+
+
+.btnAzul:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.btnVerde{
+
+    background:#16a34a;
+
+}
+
+
+
+.btnVerde:hover{
+
+    background:#15803d;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.btnVermelho{
+
+    background:#dc2626;
+
+}
+
+
+
+.btnVermelho:hover{
+
+    background:#b91c1c;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* =====================================================
+   TABELA DE BACKUP
+===================================================== */
+
+
+.tabelaBackup{
+
+    background:#fff;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.07);
+
+    margin-bottom:25px;
+
+}
+
+
+
+.tabelaBackup table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.tabelaBackup thead{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+
+
+.tabelaBackup th{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:16px;
+
+    text-align:left;
+
+    font-size:14px;
+
+}
+
+
+
+.tabelaBackup td{
+
+    padding:15px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    font-size:14px;
+
+}
+
+
+
+.tabelaBackup tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+
+.status.sucesso{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+
+
+/* =====================================================
+   BOTÕES DE AÇÃO DA TABELA
+===================================================== */
+
+
+.acao{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:8px;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    margin-right:5px;
+
+}
+
+
+
+.acao.visualizar{
+
+    background:#2563eb;
+
+}
+
+
+
+.acao.excluir{
+
+    background:#dc2626;
+
+}
+
+
+
+.acao.visualizar:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+.acao.excluir:hover{
+
+    background:#b91c1c;
+
+}
+
+
+
+/* =====================================================
+   INFORMAÇÃO
+===================================================== */
+
+
+.informacaoBackup{
+
+    background:#dbeafe;
+
+    border-left:5px solid #2563eb;
+
+    padding:18px;
+
+    border-radius:10px;
+
+}
+
+
+
+.informacaoBackup div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+.informacaoBackup i{
+
+    color:#2563eb;
+
+    font-size:22px;
+
+}
+
+
+
+.informacaoBackup p{
+
+    color:#1e40af;
+
+    font-size:14px;
+
+}
+
+
+
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
+
+
+.cardBackup,
+
+.cardBackupArea,
+
+.tabelaBackup,
+
+.informacaoBackup{
+
+    transition:.3s;
+
+}
+
+
+
+.cardBackupArea:hover,
+
+.tabelaBackup:hover{
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+
+@media(max-width:1000px){
+
+
+    .acoesBackup{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .content{
+
+        padding:15px;
+
+    }
+
+
+
+    .cardsBackup{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .acaoBackup{
+
+        padding:20px;
+
+    }
+
+
+
+    .tabelaBackup{
+
+        overflow-x:auto;
+
+    }
+
+
+
+    .tabelaBackup table{
+
+        min-width:800px;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:480px){
+
+
+    .tituloBackup h2{
+
+        font-size:18px;
+
+    }
+
+
+
+    .cardBackup h2{
+
+        font-size:22px;
+
+    }
+
+
+
+    .btnAzul,
+
+    .btnVerde,
+
+    .btnVermelho{
+
+        width:100%;
+
+    }
+
+
+
+}

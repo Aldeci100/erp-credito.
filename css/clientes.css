@@ -1,0 +1,535 @@
+/* ==========================================
+   MÓDULO CLIENTES
+========================================== */
+
+.cards-clientes{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-bottom:30px;
+}
+
+.cardCliente{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.cardCliente:hover{
+    transform:translateY(-5px);
+}
+
+.cardCliente i{
+    font-size:45px;
+    color:#fff;
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.cardCliente h2{
+    font-size:34px;
+    color:#1f2937;
+    margin-top:8px;
+}
+
+.cardCliente span{
+    font-size:17px;
+    color:#6b7280;
+}
+
+.cardCliente.azul i{
+    background:#2563eb;
+}
+
+.cardCliente.verde i{
+    background:#16a34a;
+}
+
+.cardCliente.vermelho i{
+    background:#dc2626;
+}
+
+.cardCliente.roxo i{
+    background:#7c3aed;
+}
+
+/* ==========================================
+   BARRA DE AÇÕES
+========================================== */
+
+.barra-acoes{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.acoes-esquerda{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.btnAzul,
+.btnVerde,
+.btnCinza,
+.btnNovo{
+
+    border:none;
+    border-radius:12px;
+    padding:14px 22px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+.btnAzul{
+    background:#2563eb;
+    color:#fff;
+}
+
+.btnAzul:hover{
+    background:#1d4ed8;
+}
+
+.btnVerde{
+    background:#16a34a;
+    color:#fff;
+}
+
+.btnVerde:hover{
+    background:#15803d;
+}
+
+.btnCinza{
+    background:#6b7280;
+    color:#fff;
+}
+
+.btnCinza:hover{
+    background:#4b5563;
+}
+
+.btnNovo{
+    background:#2563eb;
+    color:#fff;
+}
+
+.btnNovo:hover{
+    background:#1d4ed8;
+}
+
+/* ==========================================
+   TABELA
+========================================== */
+
+.tabela-clientes{
+
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.tabela-clientes table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+.tabela-clientes thead{
+
+    background:#2563eb;
+    color:#fff;
+
+}
+
+.tabela-clientes th{
+
+    background:#2563eb;
+    color:#fff;
+    padding:18px;
+    text-align:left;
+    font-size:17px;
+    font-weight:600;
+
+}
+
+.tabela-clientes td{
+
+    padding:18px;
+    font-size:16px;
+    border-bottom:1px solid #ececec;
+
+}
+
+.tabela-clientes tbody tr{
+
+    transition:.2s;
+
+}
+
+.tabela-clientes tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.status{
+
+    padding:8px 16px;
+    border-radius:30px;
+    color:#fff;
+    font-size:14px;
+    font-weight:bold;
+
+}
+
+.status.ativo{
+
+    background:#16a34a;
+
+}
+
+.status.inativo{
+
+    background:#dc2626;
+
+}
+
+/* ==========================================
+   BOTÕES DA TABELA
+========================================== */
+
+.acao{
+
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-right:8px;
+    transition:.3s;
+    color:#fff;
+
+}
+
+.visualizar{
+
+    background:#2563eb;
+
+}
+
+.visualizar:hover{
+
+    background:#1d4ed8;
+
+}
+
+.editar{
+
+    background:#f59e0b;
+
+}
+
+.editar:hover{
+
+    background:#d97706;
+
+}
+
+.excluir{
+
+    background:#dc2626;
+
+}
+
+.excluir:hover{
+
+    background:#b91c1c;
+
+}
+
+/* ==========================================
+   PAGINAÇÃO
+========================================== */
+
+.paginacao{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin:30px 0;
+}
+
+.paginacao button{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:10px;
+    background:#fff;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.paginacao button:hover{
+    background:#2563eb;
+    color:#fff;
+}
+
+.paginacao .ativo{
+    background:#2563eb;
+    color:#fff;
+}
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    z-index:9999;
+}
+
+.modal-content{
+    width:100%;
+    max-width:1100px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    animation:abrirModal .25s ease;
+}
+
+@keyframes abrirModal{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 30px;
+    border-bottom:1px solid #ececec;
+}
+
+.modal-header h2{
+    font-size:30px;
+    color:#1f2937;
+}
+
+.fechar{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:#ef4444;
+    color:#fff;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+}
+
+.fechar:hover{
+    background:#dc2626;
+}
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+form{
+    padding:30px;
+}
+
+.grid-form{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo-full{
+    grid-column:1 / -1;
+}
+
+.campo label{
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:600;
+    color:#374151;
+}
+
+.campo input,
+.campo select,
+.campo textarea{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+    transition:.3s;
+    background:#fff;
+}
+
+.campo textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+/* ==========================================
+   RODAPÉ DO MODAL
+========================================== */
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:35px;
+    padding-top:25px;
+    border-top:1px solid #ececec;
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.modal-content::-webkit-scrollbar{
+    width:10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:20px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover{
+    background:#94a3b8;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width:1200px){
+
+    .cards-clientes{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:900px){
+
+    .grid-form{
+        grid-template-columns:1fr;
+    }
+
+    .barra-acoes{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .top-right{
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search{
+        width:100%;
+    }
+
+    .search input{
+        width:100%;
+    }
+
+}
+
+@media (max-width:700px){
+
+    .cards-clientes{
+        grid-template-columns:1fr;
+    }
+
+    .tabela-clientes{
+        overflow-x:auto;
+    }
+
+    .modal{
+        padding:10px;
+    }
+
+    .modal-content{
+        max-height:95vh;
+    }
+
+    .modal-header h2{
+        font-size:24px;
+    }
+
+    form{
+        padding:20px;
+    }
+
+}

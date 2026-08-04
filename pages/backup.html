@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Backup | ERP Crédito</title>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/backup.css">
+
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+
+
+        <nav>
+
+            <ul>
+
+
+                <li onclick="location.href='dashboard.html'">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </li>
+
+
+                <li onclick="location.href='clientes.html'">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Clientes
+
+                </li>
+
+
+                <li onclick="location.href='parceiros.html'">
+
+                    <i class="fa-solid fa-handshake"></i>
+
+                    Parceiros
+
+                </li>
+
+
+                <li onclick="location.href='emprestimos.html'">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Empréstimos
+
+                </li>
+
+
+                <li onclick="location.href='recebimentos.html'">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Recebimentos
+
+                </li>
+
+
+                <li onclick="location.href='caixa.html'">
+
+                    <i class="fa-solid fa-cash-register"></i>
+
+                    Caixa
+
+                </li>
+
+
+                <li onclick="location.href='relatorios.html'">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Relatórios
+
+                </li>
+
+
+                <li onclick="location.href='configuracoes.html'">
+
+                    <i class="fa-solid fa-gears"></i>
+
+                    Configurações
+
+                </li>
+
+
+                <li onclick="location.href='usuarios.html'">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    Usuários
+
+                </li>
+
+
+                <li onclick="location.href='perfil.html'">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Perfil
+
+                </li>
+
+
+                <li class="active">
+
+                    <i class="fa-solid fa-database"></i>
+
+                    Backup
+
+                </li>
+
+
+            </ul>
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+
+
+    <!-- CONTEÚDO -->
+
+
+    <main class="content">
+
+
+
+        <header class="topbar">
+
+
+            <div class="top-left">
+
+
+                <h1>Backup do Sistema</h1>
+
+
+                <span>
+
+                    Proteção e gerenciamento dos dados do ERP.
+
+                </span>
+
+
+            </div>
+
+
+        </header>
+
+
+
+
+
+        <!-- CARDS -->
+
+
+        <section class="cardsBackup">
+
+
+
+            <div class="cardBackup azul">
+
+
+                <i class="fa-solid fa-database"></i>
+
+
+                <div>
+
+
+                    <span>
+                        Registros Protegidos
+                    </span>
+
+
+                    <h2>
+                        1.250
+                    </h2>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="cardBackup verde">
+
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+
+                <div>
+
+
+                    <span>
+                        Último Backup
+                    </span>
+
+
+                    <h2>
+                        Hoje
+                    </h2>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="cardBackup roxo">
+
+
+                <i class="fa-solid fa-clock"></i>
+
+
+                <div>
+
+
+                    <span>
+                        Horário
+                    </span>
+
+
+                    <h2>
+                        08:30
+                    </h2>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+        </section>
+                <!-- ==========================
+             ÁREA DE BACKUP
+        =========================== -->
+
+
+        <section class="cardBackupArea">
+
+
+            <div class="tituloBackup">
+
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+
+                <h2>
+                    Gerenciamento de Backup
+                </h2>
+
+
+            </div>
+
+
+
+
+
+            <div class="acoesBackup">
+
+
+
+                <div class="acaoBackup">
+
+
+                    <i class="fa-solid fa-file-export"></i>
+
+
+                    <h3>
+                        Criar Backup
+                    </h3>
+
+
+                    <p>
+                        Faça uma cópia de segurança dos dados do ERP.
+                    </p>
+
+
+                    <button
+                    class="btnAzul"
+                    id="criarBackup">
+
+
+                        <i class="fa-solid fa-download"></i>
+
+
+                        Gerar Backup
+
+
+                    </button>
+
+
+                </div>
+
+
+
+
+
+                <div class="acaoBackup">
+
+
+                    <i class="fa-solid fa-file-import"></i>
+
+
+                    <h3>
+                        Restaurar Backup
+                    </h3>
+
+
+                    <p>
+                        Importe um arquivo de backup salvo anteriormente.
+                    </p>
+
+
+                    <input
+                    type="file"
+                    id="arquivoBackup"
+                    accept=".json">
+
+
+
+                    <button
+                    class="btnVerde"
+                    id="restaurarBackup">
+
+
+                        <i class="fa-solid fa-upload"></i>
+
+
+                        Restaurar
+
+
+                    </button>
+
+
+                </div>
+
+
+
+
+
+                <div class="acaoBackup">
+
+
+                    <i class="fa-solid fa-trash-can"></i>
+
+
+                    <h3>
+                        Limpeza
+                    </h3>
+
+
+                    <p>
+                        Remover arquivos temporários do sistema.
+                    </p>
+
+
+                    <button
+                    class="btnVermelho"
+                    id="limparBackup">
+
+
+                        <i class="fa-solid fa-broom"></i>
+
+
+                        Limpar
+
+
+                    </button>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </section>
+
+
+
+
+
+        <!-- ==========================
+             HISTÓRICO
+        =========================== -->
+
+
+        <section class="tabelaBackup">
+
+
+            <div class="tituloBackup">
+
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+
+                <h2>
+                    Histórico de Backups
+                </h2>
+
+
+            </div>
+
+
+
+
+
+            <table>
+
+
+                <thead>
+
+
+                    <tr>
+
+                        <th>
+                            Data
+                        </th>
+
+                        <th>
+                            Horário
+                        </th>
+
+                        <th>
+                            Usuário
+                        </th>
+
+                        <th>
+                            Tamanho
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ação
+                        </th>
+
+                    </tr>
+
+
+                </thead>
+
+
+
+
+                <tbody id="listaBackup">
+
+
+
+                    <tr>
+
+
+                        <td>
+                            24/07/2026
+                        </td>
+
+
+                        <td>
+                            08:30
+                        </td>
+
+
+                        <td>
+                            Administrador
+                        </td>
+
+
+                        <td>
+                            2.5 MB
+                        </td>
+
+
+                        <td>
+
+                            <span class="status sucesso">
+                                Concluído
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+
+                            <button class="acao visualizar">
+
+                                <i class="fa-solid fa-download"></i>
+
+                            </button>
+
+
+                            <button class="acao excluir">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </section>
+
+
+
+
+
+        <!-- ==========================
+             INFORMAÇÕES
+        =========================== -->
+
+
+        <section class="informacaoBackup">
+
+
+            <div>
+
+
+                <i class="fa-solid fa-circle-info"></i>
+
+
+                <p>
+
+                    Recomendação: realize backups periódicos para evitar perda de informações.
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+</div>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["backup.js"]);</script>
+
+
+</body>
+
+</html>

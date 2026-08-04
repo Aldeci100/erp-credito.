@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários | ERP Crédito</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/usuarios.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+
+        <nav>
+
+            <ul>
+
+
+                <li onclick="location.href='dashboard.html'">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </li>
+
+
+                <li onclick="location.href='clientes.html'">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Clientes
+
+                </li>
+
+
+                <li onclick="location.href='parceiros.html'">
+
+                    <i class="fa-solid fa-handshake"></i>
+
+                    Parceiros
+
+                </li>
+
+
+                <li onclick="location.href='emprestimos.html'">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Empréstimos
+
+                </li>
+
+
+                <li onclick="location.href='recebimentos.html'">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Recebimentos
+
+                </li>
+
+
+                <li onclick="location.href='caixa.html'">
+
+                    <i class="fa-solid fa-cash-register"></i>
+
+                    Caixa
+
+                </li>
+
+
+                <li onclick="location.href='relatorios.html'">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Relatórios
+
+                </li>
+
+
+                <li onclick="location.href='configuracoes.html'">
+
+                    <i class="fa-solid fa-gears"></i>
+
+                    Configurações
+
+                </li>
+
+
+                <li class="active">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    Usuários
+
+                </li>
+
+
+            </ul>
+
+        </nav>
+
+
+    </aside>
+
+
+
+    <!-- CONTEÚDO -->
+
+
+    <main class="content">
+
+
+        <header class="topbar">
+
+
+            <div class="top-left">
+
+
+                <h1>Usuários</h1>
+
+
+                <span>
+                    Gerenciamento de usuários e permissões do sistema
+                </span>
+
+
+            </div>
+
+
+
+            <div class="top-right">
+
+
+                <div class="search">
+
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+
+                    <input 
+                    type="text"
+                    id="pesquisaUsuario"
+                    placeholder="Pesquisar usuário...">
+
+
+                </div>
+
+
+                <button class="btnNovo">
+
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+
+                    Novo Usuário
+
+
+                </button>
+
+
+            </div>
+
+
+        </header>
+
+
+
+
+
+        <!-- CARDS RESUMO -->
+
+
+        <section class="cardsUsuarios">
+
+
+            <div class="cardUsuario azul">
+
+
+                <i class="fa-solid fa-users"></i>
+
+
+                <div>
+
+                    <span>
+                        Usuários Cadastrados
+                    </span>
+
+                    <h2>
+                        25
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="cardUsuario verde">
+
+
+                <i class="fa-solid fa-user-shield"></i>
+
+
+                <div>
+
+                    <span>
+                        Administradores
+                    </span>
+
+                    <h2>
+                        02
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="cardUsuario roxo">
+
+
+                <i class="fa-solid fa-user-tie"></i>
+
+
+                <div>
+
+                    <span>
+                        Gerentes
+                    </span>
+
+                    <h2>
+                        05
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="cardUsuario laranja">
+
+
+                <i class="fa-solid fa-user"></i>
+
+
+                <div>
+
+                    <span>
+                        Operadores
+                    </span>
+
+                    <h2>
+                        18
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+        </section>
+
+
+
+
+
+        <!-- FILTROS -->
+
+
+        <section class="filtrosUsuarios">
+
+
+            <div class="campo">
+
+
+                <label>
+                    Perfil
+                </label>
+
+
+                <select id="filtroPerfil">
+
+
+                    <option>
+                        Todos
+                    </option>
+
+
+                    <option>
+                        Administrador
+                    </option>
+
+
+                    <option>
+                        Gerente
+                    </option>
+
+
+                    <option>
+                        Operador
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+
+            <div class="campo">
+
+
+                <label>
+                    Status
+                </label>
+
+
+                <select id="filtroStatus">
+
+
+                    <option>
+                        Todos
+                    </option>
+
+
+                    <option>
+                        Ativo
+                    </option>
+
+
+                    <option>
+                        Inativo
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+        </section>
+
+
+
+
+        <!-- TABELA -->
+
+
+        <section class="tabelaUsuarios">
+
+
+            <table>
+
+
+                <thead>
+
+
+                    <tr>
+
+                        <th>
+                            Nome
+                        </th>
+
+                        <th>
+                            Usuário
+                        </th>
+
+                        <th>
+                            Perfil
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Último Acesso
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+
+                </thead>
+
+
+                <tbody id="listaUsuarios">
+
+
+                    <tr>
+
+
+                        <td>
+                            Carlos Almeida
+                        </td>
+
+
+                        <td>
+                            carlos
+                        </td>
+
+
+                        <td>
+                            Administrador
+                        </td>
+
+
+                        <td>
+
+                            <span class="status ativo">
+                                Ativo
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            Hoje 08:30
+                        </td>
+
+
+                        <td>
+
+
+                            <button class="acao visualizar">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+
+                            <button class="acao editar">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+
+                        </td>
+
+
+                    </tr>
+                                        </tr>
+
+
+                    <tr>
+
+
+                        <td>
+                            Juliana Santos
+                        </td>
+
+
+                        <td>
+                            juliana
+                        </td>
+
+
+                        <td>
+                            Gerente
+                        </td>
+
+
+                        <td>
+
+                            <span class="status ativo">
+                                Ativo
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            Ontem 17:45
+                        </td>
+
+
+                        <td>
+
+
+                            <button class="acao visualizar">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+
+                            <button class="acao editar">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+
+                    <tr>
+
+
+                        <td>
+                            Pedro Oliveira
+                        </td>
+
+
+                        <td>
+                            pedro
+                        </td>
+
+
+                        <td>
+                            Operador
+                        </td>
+
+
+                        <td>
+
+                            <span class="status inativo">
+                                Inativo
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            20/07/2026
+                        </td>
+
+
+                        <td>
+
+
+                            <button class="acao visualizar">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+
+                            <button class="acao editar">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </section>
+
+
+
+
+
+        <!-- MODAL NOVO USUÁRIO -->
+
+
+        <div class="modal" id="modalUsuario">
+
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+
+                    <h2>
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Novo Usuário
+
+                    </h2>
+
+
+                    <button class="fechar">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+
+                </div>
+
+
+
+
+
+                <form id="formUsuario">
+
+
+
+                    <div class="gridFormulario">
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Nome Completo
+                            </label>
+
+
+                            <input
+                            type="text"
+                            id="nomeUsuario"
+                            placeholder="Digite o nome">
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Usuário/Login
+                            </label>
+
+
+                            <input
+                            type="text"
+                            id="loginUsuario"
+                            placeholder="Digite o usuário">
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                E-mail
+                            </label>
+
+
+                            <input
+                            type="email"
+                            id="emailUsuario"
+                            placeholder="email@exemplo.com">
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Telefone
+                            </label>
+
+
+                            <input
+                            type="text"
+                            id="telefoneUsuario">
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Senha
+                            </label>
+
+
+                            <input
+                            type="password"
+                            id="senhaUsuario">
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Confirmar Senha
+                            </label>
+
+
+                            <input
+                            type="password"
+                            id="confirmarSenhaUsuario">
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Perfil de Acesso
+                            </label>
+
+
+                            <select id="perfilUsuario">
+
+
+                                <option>
+                                    Administrador
+                                </option>
+
+
+                                <option>
+                                    Gerente
+                                </option>
+
+
+                                <option>
+                                    Operador
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Status
+                            </label>
+
+
+                            <select id="statusUsuario">
+
+
+                                <option>
+                                    Ativo
+                                </option>
+
+
+                                <option>
+                                    Inativo
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="modal-footer">
+
+
+                        <button
+                        type="button"
+                        class="btnCancelar">
+
+
+                            Cancelar
+
+
+                        </button>
+
+
+
+
+
+                        <button
+                        type="submit"
+                        class="btnSalvar">
+
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+
+                            Salvar Usuário
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </form>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </main>
+
+
+</div>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","usuarios.js"]);</script>
+
+
+</body>
+
+
+</html>

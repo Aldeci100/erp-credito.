@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios | ERP Crédito</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/relatorios.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li onclick="location.href='dashboard.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </li>
+
+                <li onclick="location.href='clientes.html'">
+                    <i class="fa-solid fa-users"></i>
+                    Clientes
+                </li>
+
+                <li onclick="location.href='parceiros.html'">
+                    <i class="fa-solid fa-handshake"></i>
+                    Parceiros
+                </li>
+
+                <li onclick="location.href='emprestimos.html'">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    Empréstimos
+                </li>
+
+                <li onclick="location.href='recebimentos.html'">
+                    <i class="fa-solid fa-wallet"></i>
+                    Recebimentos
+                </li>
+
+                <li onclick="location.href='caixa.html'">
+                    <i class="fa-solid fa-cash-register"></i>
+                    Caixa
+                </li>
+
+                <li class="active">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Relatórios
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <!-- TOPO -->
+
+        <header class="topbar">
+
+            <div class="top-left">
+
+                <h1>Relatórios Gerenciais</h1>
+
+                <span>Painel executivo de desempenho da financeira</span>
+
+            </div>
+
+        </header>
+
+        <!-- FILTROS -->
+
+        <section class="painel-filtros">
+
+            <div class="linha-filtros">
+
+                <div class="campo">
+
+                    <label>Período</label>
+
+                    <select id="periodo">
+
+                        <option selected>Todos</option>
+                        <option>Hoje</option>
+                        <option>Esta Semana</option>
+                        <option>Este Mês</option>
+                        <option>Últimos 30 Dias</option>
+                        <option>Este Ano</option>
+                        <option>Personalizado</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data Inicial</label>
+
+                    <input
+                        type="date"
+                        id="dataInicial">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data Final</label>
+
+                    <input
+                        type="date"
+                        id="dataFinal">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Cliente</label>
+
+                    <select id="cliente">
+
+                        <option>Todos</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Parceiro</label>
+
+                    <select id="parceiro">
+
+                        <option>Todos</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Status</label>
+
+                    <select id="status">
+
+                        <option>Todos</option>
+                        <option>Em Aberto</option>
+                        <option>Quitado</option>
+                        <option>Atrasado</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Tipo</label>
+
+                    <select id="tipoRelatorio">
+
+                        <option>Todos</option>
+                        <option>Financeiro</option>
+                        <option>Clientes</option>
+                        <option>Parceiros</option>
+                        <option>Recebimentos</option>
+                        <option>Caixa</option>
+                        <option>Inadimplência</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="botoes-relatorio">
+
+                <button class="btnAzul">
+
+                    <i class="fa-solid fa-filter"></i>
+
+                    Filtrar
+
+                </button>
+
+                <button class="btnCinza">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Limpar
+
+                </button>
+
+                <button class="btnVerde">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    Excel
+
+                </button>
+
+                <button class="btnVermelho">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    PDF
+
+                </button>
+
+                <button class="btnRoxo">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Imprimir
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- CARDS -->
+
+        <section class="cards-relatorio" id="secaoCards">
+
+            <div class="cardRelatorio azul">
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                <div>
+
+                    <span>Total Emprestado</span>
+
+                    <h2>R$ 350.000,00</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio verde">
+
+                <i class="fa-solid fa-circle-dollar-to-slot"></i>
+
+                <div>
+
+                    <span title="Soma de tudo que os clientes já pagaram de verdade (capital + juros), a partir do histórico real de recebimentos, dentro do período selecionado no filtro">Total Recebido ℹ️</span>
+
+                    <h2>R$ 412.450,00</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio amarelo">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <div>
+
+                    <span title="Só a parte de juros do que já foi recebido dentro do período selecionado (não inclui o que ainda falta receber). Troque o filtro 'Período' (ex: Personalizado com Julho, depois Agosto) pra comparar mês a mês">Lucro (Juros) ℹ️</span>
+
+                    <h2>R$ 62.450,00</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio vermelho">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <div>
+
+                    <span>Saldo em Aberto</span>
+
+                    <h2>R$ 85.700,00</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio azul">
+
+                <i class="fa-solid fa-users"></i>
+
+                <div>
+
+                    <span>Clientes Ativos</span>
+
+                    <h2>247</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio vermelho">
+
+                <i class="fa-solid fa-user-clock"></i>
+
+                <div>
+
+                    <span>Clientes Inadimplentes</span>
+
+                    <h2>18</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio roxo">
+
+                <i class="fa-solid fa-handshake"></i>
+
+                <div>
+
+                    <span>Parceiros Ativos</span>
+
+                    <h2>35</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRelatorio verde">
+
+                <i class="fa-solid fa-sack-dollar"></i>
+
+                <div>
+
+                    <span>Comissões Pagas</span>
+
+                    <h2>R$ 18.650,00</h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ABAS -->
+
+        <section class="abas-relatorio">
+
+            <button class="aba ativa">📊 Visão Geral</button>
+
+            <button class="aba">💰 Financeiro</button>
+
+            <button class="aba">👥 Clientes & Parceiros</button>
+
+            <button class="aba">📄 Operacional</button>
+
+        </section>
+
+        <!-- TABELA -->
+
+        <section class="tabela-relatorios" id="secaoTabela">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Data</th>
+                        <th>Cliente</th>
+                        <th>Contrato</th>
+                        <th>Parceiro</th>
+                        <th>Valor</th>
+                        <th>Juros</th>
+                        <th>Recebido</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaRelatorios">
+
+                    <tr>
+
+                        <td>01/07/2026</td>
+                        <td>Maria Silva</td>
+                        <td>000125</td>
+                        <td>José Almeida</td>
+                        <td>R$ 5.000,00</td>
+                        <td>R$ 650,00</td>
+                        <td>R$ 5.650,00</td>
+                        <td><span class="status quitado">Quitado</span></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>05/07/2026</td>
+                        <td>Carlos Souza</td>
+                        <td>000128</td>
+                        <td>Maria Costa</td>
+                        <td>R$ 3.000,00</td>
+                        <td>R$ 420,00</td>
+                        <td>R$ 0,00</td>
+                        <td><span class="status atraso">Atrasado</span></td>
+
+                    </tr>
+                                    </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- EMPRESTADO x JUROS POR PERÍODO -->
+
+        <section class="tabela-relatorios" id="secaoPeriodo" style="margin-bottom:25px;">
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 16px 0;">
+
+                <h2 style="margin:0;">
+                    <i class="fa-solid fa-chart-column"></i>
+                    Emprestado x Juros e Capital Recebidos por Período
+                </h2>
+
+                <div>
+                    <button type="button" class="btnAzul" id="btnPeriodoMes">Por Mês</button>
+                    <button type="button" class="btnCinza" id="btnPeriodoSemana">Por Semana</button>
+                </div>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Período</th>
+                        <th>Novos Contratos</th>
+                        <th>Total Emprestado</th>
+                        <th>Juros Recebidos</th>
+                        <th>Capital Recebido</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaEmprestadoJuros">
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr style="font-weight:bold;">
+                        <td>Total geral</td>
+                        <td id="totalEmprestadoJurosContratos">0</td>
+                        <td id="totalEmprestadoJurosEmprestado">R$ 0,00</td>
+                        <td id="totalEmprestadoJurosJuros">R$ 0,00</td>
+                        <td id="totalEmprestadoJurosCapital">R$ 0,00</td>
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+            <p style="padding:12px 16px; color:#6b7280; font-size:13px;">
+                💡 "Capital Emprestado" (Dashboard) menos "Capital em Aberto" deve ser igual à soma de
+                "Capital Recebido" de todos os períodos aqui embaixo — é o total de principal que já voltou.
+            </p>
+
+        </section>
+
+        <!-- RESUMO FINANCEIRO -->
+
+        <section class="resumo-financeiro" id="secaoResumo">
+
+            <div class="boxResumo">
+
+                <h2>
+                    <i class="fa-solid fa-chart-column"></i>
+                    Resumo do Período
+                </h2>
+
+                <div class="linhaResumo">
+                    <span>Total Emprestado</span>
+                    <strong>R$ 350.000,00</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Total Recebido</span>
+                    <strong>R$ 412.450,00</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Lucro (Juros)</span>
+                    <strong>R$ 62.450,00</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Saldo em Aberto</span>
+                    <strong>R$ 85.700,00</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Ticket Médio</span>
+                    <strong>R$ 2.450,00</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Novos Contratos</span>
+                    <strong>52</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Contratos Quitados</span>
+                    <strong>31</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Contratos em Aberto</span>
+                    <strong>21</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Clientes Ativos</span>
+                    <strong>247</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Clientes Inadimplentes</span>
+                    <strong>18</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Parceiros Ativos</span>
+                    <strong>35</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Comissões Pagas</span>
+                    <strong>R$ 18.650,00</strong>
+                </div>
+
+                <div class="linhaResumo">
+                    <span>Comissões Pendentes</span>
+                    <strong>R$ 3.540,00</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- RANKINGS -->
+
+        <section class="rankings" id="secaoRankings">
+
+            <div class="ranking">
+
+                <h2>
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                    Ranking de Parceiros
+
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Parceiro</th>
+                            <th>Clientes</th>
+                            <th>Contratos</th>
+                            <th>Valor</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="rankingParceiros">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="ranking">
+
+                <h2>
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Top Clientes
+
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Cliente</th>
+                            <th>Contratos</th>
+                            <th>Total</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="rankingClientes">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- GRÁFICOS -->
+
+        <section class="graficos" id="secaoGraficos">
+
+            <div class="grafico">
+
+                <h3>
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Evolução dos Empréstimos
+
+                </h3>
+
+                <canvas id="graficoEmprestimos"></canvas>
+
+            </div>
+
+            <div class="grafico">
+
+                <h3>
+
+                    <i class="fa-solid fa-coins"></i>
+
+                    Recebimentos
+
+                </h3>
+
+                <canvas id="graficoRecebimentos"></canvas>
+
+            </div>
+
+            <div class="grafico">
+
+                <h3>
+
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+
+                    Lucro Mensal
+
+                </h3>
+
+                <canvas id="graficoLucro"></canvas>
+
+            </div>
+
+            <div class="grafico">
+
+                <h3>
+
+                    <i class="fa-solid fa-handshake"></i>
+
+                    Produção dos Parceiros
+
+                </h3>
+
+                <canvas id="graficoParceiros"></canvas>
+
+            </div>
+
+            <div class="grafico">
+
+                <h3>
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    Novos Clientes
+
+                </h3>
+
+                <canvas id="graficoClientes"></canvas>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","relatorios.js"]);</script>
+
+</body>
+
+</html>

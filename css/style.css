@@ -1,0 +1,474 @@
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#eef2f7;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ===========================
+   MENU LATERAL
+=========================== */
+
+.sidebar{
+    width:280px;
+    background:#1f2937;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+}
+
+.logo{
+    height:90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo i{
+    font-size:34px;
+}
+
+.logo h2{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:25px 0;
+}
+
+.sidebar li{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px 30px;
+    font-size:21px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.sidebar li i{
+    width:30px;
+    font-size:24px;
+}
+
+.sidebar li:hover{
+    background:#374151;
+}
+
+.sidebar li.active{
+    background:#2563eb;
+}
+
+/* ===========================
+   CONTEÚDO
+=========================== */
+
+.content{
+    flex:1;
+    padding:35px;
+}
+
+/* ===========================
+   TOPO
+=========================== */
+
+.topbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+
+}
+
+.top-left h1{
+
+    font-size:40px;
+    color:#1f2937;
+
+}
+
+.top-left span{
+
+    font-size:18px;
+    color:#6b7280;
+
+}
+
+.top-right{
+
+    display:flex;
+    align-items:center;
+    gap:25px;
+
+}
+
+/* ===========================
+   PESQUISA
+=========================== */
+
+.search{
+
+    background:#fff;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px 20px;
+    border-radius:14px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.search input{
+
+    border:none;
+    outline:none;
+    font-size:18px;
+    width:250px;
+
+}
+
+.search i{
+
+    font-size:22px;
+    color:#6b7280;
+
+}
+
+/* ===========================
+   USUÁRIO
+=========================== */
+
+.user{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+.user i{
+
+    font-size:55px;
+    color:#2563eb;
+
+}
+
+.user strong{
+
+    display:block;
+    font-size:19px;
+
+}
+
+.user span{
+
+    color:#6b7280;
+    font-size:16px;
+
+}
+
+/* ===========================
+   CARDS
+=========================== */
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:25px;
+    margin-bottom:35px;
+
+}
+
+.card{
+
+    border-radius:18px;
+    color:#fff;
+    padding:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+
+}
+
+.card h3{
+
+    font-size:18px;
+    margin-bottom:12px;
+    font-weight:500;
+
+}
+
+.card h2{
+
+    font-size:34px;
+
+}
+
+.card i{
+
+    font-size:46px;
+
+}
+
+.card.clicavel{
+
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+
+}
+
+.card.clicavel:hover{
+
+    transform:translateY(-4px);
+    box-shadow:0 12px 24px rgba(0,0,0,.2);
+
+}
+
+.azul{
+    background:#2563eb;
+}
+
+.verde{
+    background:#16a34a;
+}
+
+.roxo{
+    background:#7c3aed;
+}
+
+.laranja{
+    background:#ea580c;
+}
+
+.vermelho{
+    background:#dc2626;
+}
+
+/* ===========================
+   PAINÉIS
+=========================== */
+
+.dashboard-grid{
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+
+}
+
+.panel{
+
+    background:#fff;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.panel h2{
+
+    font-size:28px;
+    margin-bottom:25px;
+    color:#1f2937;
+
+}
+
+/* ===========================
+   TABELA
+=========================== */
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#f3f4f6;
+    text-align:left;
+    padding:18px;
+    font-size:18px;
+
+}
+
+table td{
+
+    padding:18px;
+    font-size:17px;
+    border-bottom:1px solid #ececec;
+
+}
+
+/* ===========================
+   STATUS
+=========================== */
+
+.status{
+
+    padding:8px 18px;
+    border-radius:30px;
+    color:#fff;
+    font-size:15px;
+    font-weight:bold;
+
+}
+
+.ok{
+
+    background:#16a34a;
+
+}
+
+.atraso{
+
+    background:#dc2626;
+
+}
+
+/* ===========================
+   RESUMO
+=========================== */
+
+.info{
+
+    background:#f8fafc;
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:18px;
+
+}
+
+.info p{
+
+    font-size:18px;
+    color:#6b7280;
+    margin-bottom:10px;
+
+}
+
+.info strong{
+
+    font-size:32px;
+    color:#1f2937;
+
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media(max-width:1400px){
+
+.cards{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:900px){
+
+.layout{
+
+flex-direction:column;
+
+}
+
+.sidebar{
+
+width:100%;
+
+}
+
+.topbar{
+
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+
+}
+
+.top-right{
+
+flex-direction:column;
+align-items:flex-start;
+
+}
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+.search input{
+
+width:180px;
+
+}
+
+}
+/* ============================
+   LINKS DO MENU
+============================ */
+
+.sidebar nav ul li a{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    width:100%;
+
+    padding:15px 20px;
+
+    color:#ffffff;
+
+    text-decoration:none;
+
+}
+
+.sidebar nav ul li.active a{
+
+    color:#ffffff;
+
+}
+
+.sidebar nav ul li:hover a{
+
+    color:#ffffff;
+
+}

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recebimentos | ERP Crédito</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/recebimentos.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li onclick="location.href='dashboard.html'">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </li>
+
+                <li onclick="location.href='clientes.html'">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Clientes
+
+                </li>
+
+                <li onclick="location.href='parceiros.html'">
+
+                    <i class="fa-solid fa-handshake"></i>
+
+                    Parceiros
+
+                </li>
+
+                <li onclick="location.href='emprestimos.html'">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Empréstimos
+
+                </li>
+
+                <li class="active">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Recebimentos
+
+                </li>
+
+                <li onclick="location.href='caixa.html'">
+
+                    <i class="fa-solid fa-cash-register"></i>
+
+                    Caixa
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <header class="topbar">
+
+            <div class="top-left">
+
+                <h1>Recebimentos</h1>
+
+                <span>Controle das parcelas e pagamentos recebidos</span>
+
+            </div>
+
+            <div class="top-right">
+
+                <div class="search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="pesquisaRecebimento"
+                        placeholder="Pesquisar cliente, contrato ou parcela...">
+
+                </div>
+
+                <button class="btnNovo">
+
+                    <i class="fa-solid fa-money-check-dollar"></i>
+
+                    Receber Parcela
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- AVISO DE FILTRO POR CONTRATO -->
+
+        <div id="avisoFiltroContrato" style="display:none; align-items:center; justify-content:space-between; background:#dbeafe; color:#1e3a8a; padding:12px 18px; border-radius:10px; margin-bottom:15px;">
+
+            <span id="avisoFiltroContratoTexto"></span>
+
+            <button type="button" class="btnAzul" id="btnLimparFiltroContrato">Ver Todos os Recebimentos</button>
+
+        </div>
+
+        <!-- CARDS -->
+
+        <section class="cards-recebimentos">
+
+            <div class="cardRecebimento azul">
+
+                <i class="fa-solid fa-sack-dollar"></i>
+
+                <div>
+
+                    <span>Total a Receber</span>
+
+                    <h2 id="cardTotalReceber">R$ 0,00</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRecebimento verde">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <div>
+
+                    <span>Recebido Hoje</span>
+
+                    <h2 id="cardRecebidoHoje">R$ 0,00</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRecebimento vermelho">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <div>
+
+                    <span>Parcelas Vencidas</span>
+
+                   <h2 id="cardParcelasVencidas">0</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardRecebimento roxo">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <div>
+
+                    <span>Contratos Pendentes</span>
+
+                    <h2 id="cardContratosPendentes">0</h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FILTROS -->
+
+        <section class="barra-acoes">
+
+            <div class="acoes-esquerda">
+
+                <button class="btnAzul" id="btnHoje">Hoje</button>
+
+                <button class="btnVerde" id="btnSemana">Esta Semana</button>
+
+                <button class="btnCinza" id="btnMes">Este Mês</button>
+
+                <button class="btnCinza" id="btnAtraso">Em Atraso</button>
+
+                <button class="btnCinza" id="btnQuitados">Quitados</button>
+
+                <button class="btnCinza" id="btnTodos">Todos</button>
+            </div>
+
+        </section>
+
+        <!-- TABELA -->
+
+        <section class="tabela-recebimentos">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Contrato</th>
+                        <th>Cliente</th>
+                        <th>Parceiro</th>
+                        <th>Vencimento</th>
+                        <th>Saldo Devedor</th>
+                        <th>Juros do Mês</th>
+                        <th>Dias Atraso</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaRecebimentos">
+
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- PAGINAÇÃO -->
+
+        <div class="paginacao">
+
+            <button>&laquo;</button>
+
+            <button class="ativo">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button>&raquo;</button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- MODAL RECEBIMENTO -->
+
+<div class="modal" id="modalRecebimento">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Receber Parcela</h2>
+
+            <button class="fechar">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="formRecebimento">
+
+            <input type="hidden" id="parcelaId">
+
+            <div class="grid-form">
+
+                <div class="campo">
+
+                    <label>Cliente</label>
+
+                    <input
+                        type="text"
+                        id="cliente"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Contrato</label>
+
+                    <input
+                        type="text"
+                        id="contrato"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Parcela</label>
+
+                    <input
+                        type="text"
+                        id="parcela"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Vencimento</label>
+
+                    <input
+                        type="date"
+                        id="vencimento">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data do Pagamento</label>
+
+                    <input
+                        type="date"
+                        id="dataPagamento"
+                        title="Data em que o pagamento foi de fato recebido — pode ser diferente de hoje ao lançar um pagamento atrasado ou registrar um histórico antigo">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Valor Original</label>
+
+                    <input
+                        type="number"
+                        id="valorOriginal"
+                        step="0.01"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Multa</label>
+
+                    <input
+                        type="number"
+                        id="multa"
+                        step="0.01"
+                        value="0.00">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Juros</label>
+
+                    <input
+                        type="number"
+                        id="juros"
+                        step="0.01"
+                        value="0.00"
+                        readonly>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Desconto</label>
+
+                    <input
+                        type="number"
+                        id="desconto"
+                        step="0.01"
+                        value="0.00">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Valor Recebido</label>
+
+                        <input
+                            type="number"
+                            id="valorRecebido"
+                            step="0.01"
+                            min="0"
+                            placeholder="Informe o valor recebido">
+
+                </div>
+
+                <div class="campo">
+
+                        <label>Amortização</label>
+
+                        <input
+                            type="number"
+                            id="amortizacao"
+                            step="0.01"
+                            readonly>
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Novo Saldo</label>
+
+                        <input
+                            type="number"
+                            id="novoSaldo"
+                            step="0.01"
+                            readonly>
+
+                    </div>
+
+                <div class="campo">
+
+                    <label>Forma de Pagamento</label>
+
+                    <select id="formaPagamento">
+
+                        <option>Dinheiro</option>
+                        <option>PIX</option>
+                        <option>Cartão de Débito</option>
+                        <option>Cartão de Crédito</option>
+                        <option>Transferência</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data do Pagamento</label>
+
+                    <input
+                        type="date"
+                        id="dataPagamento">
+
+                </div>
+
+                <div class="campo campo-full">
+
+                    <label>Observações</label>
+
+                    <textarea
+                        id="observacao"
+                        rows="4"></textarea>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    id="btnCancelarRecebimento"
+                    class="btnCinza">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btnAzul">
+
+                    Confirmar Recebimento
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","recebimentos.js"]);</script>
+
+<!-- ===========================================
+     MODAL - EXTRATO DO CONTRATO
+=========================================== -->
+
+<div id="modalExtrato" class="modal">
+
+    <div class="modal-content modal-extrato">
+
+        <div class="modal-header">
+           <h2 id="extTitulo">Extrato</h2>
+
+            <span class="close" id="fecharExtrato">&times;</span>
+        </div>
+
+        <div class="extrato-cabecalho">
+
+             <div class="linha-info">
+                <strong>Contrato:</strong>
+                <span id="extContrato"></span>
+            </div>
+
+            <div class="linha-info">
+                <strong>Cliente:</strong>
+                <span id="extCliente"></span>
+            </div>
+
+            <div class="linha-info">
+                <strong>Parceiro:</strong>
+                <span id="extParceiro"></span>
+            </div>
+
+            <div class="linha-info">
+
+            <strong>Data do Empréstimo:</strong>
+
+            <span id="extDataEmprestimo"></span>
+
+         </div>
+
+            <div class="linha-info">
+                <strong>Valor Emprestado:</strong>
+                <span id="extValor"></span>
+            </div>
+
+            <div class="linha-info">
+                <strong>Saldo Atual:</strong>
+                <span id="extSaldo"></span>
+            </div>
+
+            <div class="linha-info">
+                <strong>Taxa de Juros:</strong>
+                <span id="extJuros"></span>
+            </div>
+
+            <div class="linha-info">
+                <strong>Próximo Vencimento:</strong>
+                <span id="extVencimento"></span>
+            </div>
+
+            <div class="linha-info">
+                <strong>Status:</strong>
+                <span id="extStatus"></span>
+            </div>
+
+            <div class="linha-info" style="grid-column:1 / -1;">
+                <strong>Observações:</strong>
+                <span id="extObservacoes">-</span>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="resumo-extrato">
+
+    <div class="cardResumo">
+        <span>💰 Total Recebido</span>
+        <strong id="extTotalRecebido">R$ 0,00</strong>
+    </div>
+
+    <div class="cardResumo">
+        <span>📈 Total Juros</span>
+        <strong id="extTotalJuros">R$ 0,00</strong>
+    </div>
+
+    <div class="cardResumo">
+        <span>🏦 Total Amortizado</span>
+        <strong id="extTotalAmortizado">R$ 0,00</strong>
+    </div>
+
+</div>
+
+        <h3>Histórico de Pagamentos</h3>
+
+        <table class="tabela-historico">
+
+            <thead>
+
+                <tr>
+
+                    <th>Data</th>
+                    <th>Valor Recebido</th>
+                    <th>Juros</th>
+                    <th>Amortização</th>
+                    <th>Saldo</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tbodyHistorico">
+
+                <tr>
+
+                    <td colspan="5" style="text-align:center;">
+                        Nenhum pagamento registrado.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="modal-footer">
+
+            <button
+    id="btnFecharExtrato"
+    class="btnAzul">
+
+    Fechar
+
+</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

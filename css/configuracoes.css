@@ -1,0 +1,431 @@
+/* ==========================================
+   CONFIGURAÇÕES
+========================================== */
+
+.content{
+    padding:25px;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+/* ==========================================
+   TOPO
+========================================== */
+
+.topbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.topbar h1{
+
+    font-size:28px;
+    color:#1e3a8a;
+
+    margin-bottom:5px;
+
+}
+
+.topbar span{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.cardConfiguracao{
+
+    background:#fff;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   TITULO
+========================================== */
+
+.tituloCard{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+    padding-bottom:15px;
+
+    border-bottom:1px solid #ececec;
+
+}
+
+.tituloCard i{
+
+    color:#1e3a8a;
+
+    font-size:22px;
+
+}
+
+.tituloCard h2{
+
+    color:#1e3a8a;
+
+    font-size:20px;
+
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.gridFormulario{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+
+}
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.campoGrande{
+
+    grid-column:span 2;
+
+}
+
+.campo label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#555;
+
+    margin-bottom:8px;
+
+}
+
+.campo input{
+
+    width:100%;
+
+    padding:12px 14px;
+
+    border:1px solid #d8d8d8;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+    background:#fff;
+
+}
+
+.campo input:focus{
+
+    outline:none;
+
+    border-color:#1e3a8a;
+
+    box-shadow:0 0 8px rgba(30,58,138,.18);
+
+}
+
+/* ==========================================
+   INPUT FILE
+========================================== */
+
+input[type=file]{
+
+    padding:10px;
+
+    cursor:pointer;
+
+}
+/* ==========================================
+   CAMPOS SOMENTE LEITURA
+========================================== */
+
+.campo input[readonly]{
+
+    background:#f1f5f9;
+
+    color:#64748b;
+
+    cursor:not-allowed;
+
+}
+
+
+/* ==========================================
+   AÇÕES
+========================================== */
+
+.acoesConfiguracao{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:30px;
+
+    padding-bottom:20px;
+
+}
+
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.acoesConfiguracao button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:13px 25px;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+/* SALVAR */
+
+.btnSalvar{
+
+    background:#16a34a;
+
+    color:#fff;
+
+}
+
+
+.btnSalvar:hover{
+
+    background:#15803d;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* RESTAURAR */
+
+.btnSecundario{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+
+.btnSecundario:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* CANCELAR */
+
+.btnCancelar{
+
+    background:#dc2626;
+
+    color:#fff;
+
+}
+
+
+.btnCancelar:hover{
+
+    background:#b91c1c;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ==========================================
+   ANIMAÇÃO DOS CARDS
+========================================== */
+
+.cardConfiguracao{
+
+    transition:.3s;
+
+}
+
+
+.cardConfiguracao:hover{
+
+    box-shadow:0 8px 22px rgba(0,0,0,.12);
+
+}
+
+
+/* ==========================================
+   MENSAGENS
+========================================== */
+
+.mensagem{
+
+    padding:15px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+    font-weight:600;
+
+}
+
+
+.mensagem.sucesso{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+.mensagem.erro{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+
+@media(max-width:900px){
+
+    .gridFormulario{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .campoGrande{
+
+        grid-column:auto;
+
+    }
+
+
+    .acoesConfiguracao{
+
+        flex-direction:column;
+
+    }
+
+
+    .acoesConfiguracao button{
+
+        width:100%;
+
+    }
+
+}
+
+
+
+@media(max-width:600px){
+
+    .content{
+
+        padding:15px;
+
+    }
+
+
+    .cardConfiguracao{
+
+        padding:18px;
+
+    }
+
+
+    .tituloCard h2{
+
+        font-size:18px;
+
+    }
+
+
+    .topbar h1{
+
+        font-size:24px;
+
+    }
+
+
+    .campo input{
+
+        font-size:14px;
+
+    }
+
+}

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Parceiros | ERP Crédito</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/parceiros.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <h2>ERP Crédito</h2>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li onclick="location.href='dashboard.html'">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </li>
+
+                <li onclick="location.href='clientes.html'">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Clientes
+
+                </li>
+
+                <li class="active">
+
+                    <i class="fa-solid fa-handshake"></i>
+
+                    Parceiros
+
+                </li>
+
+                <li onclick="location.href='emprestimos.html'">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Empréstimos
+
+                </li>
+
+                <li onclick="location.href='recebimentos.html'">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Recebimentos
+
+                </li>
+
+                <li onclick="location.href='caixa.html'">
+
+                    <i class="fa-solid fa-cash-register"></i>
+
+                    Caixa
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <header class="topbar">
+
+            <div class="top-left">
+
+                <h1>Parceiros</h1>
+
+                <span>Cadastro e gerenciamento de parceiros</span>
+
+            </div>
+
+            <div class="top-right">
+
+                <div class="search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="pesquisaParceiro"
+                        placeholder="Pesquisar parceiro...">
+
+                </div>
+
+                <button class="btnNovo">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Novo Parceiro
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- CARDS -->
+
+        <section class="cards-parceiros">
+
+            <div class="cardParceiro azul">
+
+                <i class="fa-solid fa-handshake"></i>
+
+                <div>
+
+                    <span>Total de Parceiros</span>
+
+                    <h2 id="cardTotalParceiros">0</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardParceiro verde">
+
+                <i class="fa-solid fa-user-check"></i>
+
+                <div>
+
+                    <span>Ativos</span>
+
+                    <h2 id="cardParceirosAtivos">0</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardParceiro roxo">
+
+                <i class="fa-solid fa-users"></i>
+
+                <div>
+
+                    <span>Clientes Indicados</span>
+
+                    <h2 id="cardClientesIndicados">0</h2>
+
+                </div>
+
+            </div>
+
+            <div class="cardParceiro laranja">
+
+                <i class="fa-solid fa-sack-dollar"></i>
+
+                <div>
+
+                    <span>Comissões</span>
+
+                    <h2 id="cardComissoes">R$ 0,00</h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- BARRA DE AÇÕES -->
+
+        <section class="barra-acoes">
+
+            <div class="acoes-esquerda">
+
+                <button class="btnAzul">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Novo Parceiro
+
+                </button>
+
+                <button class="btnVerde" id="btnExportarParceiros">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    Exportar
+
+                </button>
+
+                <button class="btnCinza" id="btnImprimirParceiros">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Imprimir
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- TABELA -->
+
+        <section class="tabela-parceiros">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Comissão</th>
+                        <th>Clientes</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaParceiros">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- PAGINAÇÃO -->
+
+        <div class="paginacao">
+
+            <button>&laquo;</button>
+
+            <button class="ativo">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button>&raquo;</button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modalParceiro">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Novo Parceiro</h2>
+
+            <button class="fechar">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form>
+
+            <div class="grid-form">
+
+                <div class="campo">
+
+                    <label>Nome Completo</label>
+
+                    <input type="text" id="nomeParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>CPF / CNPJ</label>
+
+                   <input type="text" id="cpfCnpjParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Telefone</label>
+
+                    <input type="text" id="telefoneParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>WhatsApp</label>
+
+                    <input type="text" id="whatsappParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>E-mail</label>
+
+                    <input type="email" id="emailParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Comissão (%)</label>
+
+                    <input type="number" id="comissaoParceiro" step="0.01">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Banco</label>
+
+                    <input type="text" id="bancoParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Agência</label>
+
+                    <input type="text" id="agenciaParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Conta</label>
+
+                    <input type="text" id="contaParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Chave PIX</label>
+
+                    <input type="text" id="pixParceiro">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Status</label>
+
+                    <select id="statusParceiro">
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                    </select>
+
+                </div>
+
+                <div class="campo campo-full">
+
+                   <label>Observações</label>
+
+<textarea id="observacaoParceiro" rows="4"></textarea>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btnCinza" id="btnCancelarParceiro">
+
+                    Cancelar
+
+                </button>
+
+                <button type="submit" class="btnAzul">
+
+                    Salvar Parceiro
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- MODAL - EXTRATO DO PARCEIRO -->
+
+<div class="modal" id="modalExtratoParceiro">
+
+    <div class="modal-content modal-extrato">
+
+        <div class="modal-header">
+
+            <h2 id="extParceiroNome">Extrato do Parceiro</h2>
+
+            <button class="fechar" id="fecharExtratoParceiro">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <!-- FILTRO POR PERÍODO -->
+
+        <div class="grid-form" style="margin-bottom:20px;">
+
+            <div class="campo">
+
+                <label>Data Inicial</label>
+
+                <input type="date" id="extParceiroDataInicial">
+
+            </div>
+
+            <div class="campo">
+
+                <label>Data Final</label>
+
+                <input type="date" id="extParceiroDataFinal">
+
+            </div>
+
+            <div class="campo" style="display:flex; align-items:flex-end; gap:10px;">
+
+                <button type="button" class="btnAzul" id="btnFiltrarExtratoParceiro">
+                    Filtrar
+                </button>
+
+                <button type="button" class="btnCinza" id="btnLimparExtratoParceiro">
+                    Limpar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- RESUMO -->
+
+        <div class="resumo-extrato">
+
+            <div class="cardResumo">
+                <span>📄 Contratos</span>
+                <strong id="extParceiroTotalContratos">0</strong>
+            </div>
+
+            <div class="cardResumo">
+                <span>💰 Comissão a Receber</span>
+                <strong id="extParceiroAReceber">R$ 0,00</strong>
+            </div>
+
+            <div class="cardResumo">
+                <span>✅ Comissão Paga</span>
+                <strong id="extParceiroRecebido">R$ 0,00</strong>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+
+            <h3 style="margin:0;">Contratos do Parceiro</h3>
+
+            <button type="button" class="btnVerde" id="btnBaixaLoteParceiro" title="Marca como pagas todas as comissões pendentes (não atrasadas) deste parceiro">
+                Dar Baixa em Todas as Pendentes
+            </button>
+
+        </div>
+
+        <div class="tabela-extrato-scroll">
+
+            <table class="tabela-historico">
+
+                <thead>
+
+                    <tr>
+                        <th>Contrato</th>
+                        <th>Cliente</th>
+                        <th>Data</th>
+                        <th>Valor Emprestado</th>
+                        <th>Comissão</th>
+                        <th>Vencimento</th>
+                        <th>Situação</th>
+                        <th>Ações</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbodyExtratoParceiro">
+
+                    <tr>
+                        <td colspan="8" style="text-align:center;">
+                            Nenhum contrato encontrado.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btnAzul" id="btnFecharExtratoParceiro">
+                Fechar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../js/cloud-sync.js"></script>
+<script>CloudSync.iniciar(["core.js","menu.js","parceiros.js"]);</script>
+
+</body>
+
+</html>
