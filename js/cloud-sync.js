@@ -9,11 +9,14 @@
 // panos:
 //
 // 1. Ao abrir a página: confere login, busca os dados mais recentes da
-//    nuvem e só DEPOIS carrega core.js/menu.js/o script da página.
+//    nuvem (só sobrescrevendo o que estiver desatualizado — nunca troca
+//    um dado local mais novo por um mais velho da nuvem) e só DEPOIS
+//    carrega core.js/menu.js/o script da página.
 // 2. Enquanto a página está aberta: qualquer gravação feita no
-//    localStorage (de qualquer arquivo) é detectada e enviada pra
-//    nuvem automaticamente, com um pequeno atraso (debounce) pra não
-//    disparar uma escrita por tecla digitada.
+//    localStorage (de qualquer arquivo) é enviada pra nuvem NA HORA,
+//    sem atraso — porque esse sistema faz navegação de página inteira
+//    a cada ação (salvar → alerta → redireciona pra outra página), e
+//    um atraso destruiria o envio antes dele completar.
 // 3. A cada 20s, confere se algum OUTRO aparelho salvou algo mais novo
 //    e, se sim, recarrega a página pra refletir.
 
@@ -35,7 +38,6 @@ window.CloudSync = (function () {
     // seja interpretada como "o usuário mudou algo" e mande de volta.
     let aplicandoDadosDaNuvem = false;
 
-    let temporizadorEnvio = null;
     let temporizadorVerificacao = null;
 
     // ------------------------------
@@ -124,9 +126,19 @@ window.CloudSync = (function () {
             snapshot.forEach(function (doc) {
 
                 const info = doc.data();
+                const tsRemoto = Number(info.atualizadoEm || 0);
+                const tsLocal = Number(localStorage.getItem("_syncTs_" + doc.id) || 0);
 
-                localStorage.setItem(doc.id, info.conteudo || "[]");
-                localStorage.setItem("_syncTs_" + doc.id, String(info.atualizadoEm || 0));
+                // Só sobrescreve o que já está salvo localmente se a
+                // nuvem tiver algo de fato mais novo. Sem essa conferência,
+                // uma gravação local que ainda não terminou de subir
+                // (ex: acabou de criar um contrato e a página já mudou)
+                // podia ser apagada por uma busca que chega logo depois
+                // trazendo a versão antiga da nuvem.
+                if (tsRemoto > tsLocal) {
+                    localStorage.setItem(doc.id, info.conteudo || "[]");
+                    localStorage.setItem("_syncTs_" + doc.id, String(tsRemoto));
+                }
 
             });
 
@@ -168,20 +180,14 @@ window.CloudSync = (function () {
 
     }
 
-    function agendarEnvio(chave) {
-
-        clearTimeout(temporizadorEnvio);
-
-        temporizadorEnvio = setTimeout(function () {
-            enviarChaveParaNuvem(chave);
-        }, 2000);
-
-    }
-
     // Substitui o localStorage.setItem nativo por uma versão que,
-    // depois de gravar local normalmente, também agenda o envio pra
-    // nuvem — sem precisar alterar nenhum dos arquivos que já chamam
-    // localStorage.setItem hoje.
+    // depois de gravar local normalmente, também envia pra nuvem NA
+    // HORA — sem precisar alterar nenhum dos arquivos que já chamam
+    // localStorage.setItem hoje. Antes isso tinha um atraso (debounce)
+    // de 2s, mas como o sistema troca de página inteira logo depois de
+    // salvar (salvar → alerta → redireciona), esse atraso fazia o envio
+    // ser cancelado pela navegação antes de sair — perdendo o dado que
+    // acabou de ser criado. Envio imediato resolve isso.
     function ativarInterceptacaoDeGravacao() {
 
         const setItemOriginal = localStorage.setItem.bind(localStorage);
@@ -191,7 +197,7 @@ window.CloudSync = (function () {
             setItemOriginal(chave, valor);
 
             if (!aplicandoDadosDaNuvem && CHAVES_SINCRONIZADAS.indexOf(chave) !== -1) {
-                agendarEnvio(chave);
+                enviarChaveParaNuvem(chave);
             }
 
         };
