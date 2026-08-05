@@ -496,9 +496,11 @@ tr.linha-oculta{
 
     width:95%;
     max-width:900px;
+    max-height:90vh;
     background:#fff;
     border-radius:12px;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
     animation:modal .25s ease;
 
 }
