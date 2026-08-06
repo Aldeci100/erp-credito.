@@ -1,5 +1,5 @@
 // =====================================================
-// AVISOS DE PARCELA POR WHATSAPP - ERP CRÉDITO
+// AVISOS DE PARCELA POR TELEGRAM - ERP CRÉDITO
 // =====================================================
 //
 // Este arquivo NÃO roda sozinho aqui no projeto — é só a referência
@@ -12,7 +12,7 @@
 // 2. Apague o conteúdo padrão (function myFunction(){}) e cole este
 //    arquivo inteiro no lugar.
 // 3. Preencha as constantes de configuração logo abaixo com os seus
-//    valores reais (Twilio + conta de serviço do Firebase).
+//    valores reais (bot do Telegram + conta de serviço do Firebase).
 // 4. Rode a função "verificarParcelas" uma vez manualmente (▶ no
 //    topo, selecionando essa função) — o Google vai pedir autorização,
 //    é normal, aceite.
@@ -24,18 +24,14 @@
 // CONFIGURAÇÃO — PREENCHA AQUI
 // =====================================================
 
-// --- Twilio (envio do WhatsApp) ---
-// Pegue no painel da Twilio (console.twilio.com), na tela inicial.
-const TWILIO_ACCOUNT_SID = "COLE_AQUI_SEU_ACCOUNT_SID";
-const TWILIO_AUTH_TOKEN = "COLE_AQUI_SEU_AUTH_TOKEN";
+// --- Telegram (envio do aviso) ---
+// Token que o @BotFather te deu ao criar o bot (algo como
+// "123456789:ABCdefGhIJKlmNoPQRsTUVwxyz").
+const TELEGRAM_BOT_TOKEN = "COLE_AQUI_O_TOKEN_DO_BOT";
 
-// Número de WhatsApp do sandbox da Twilio (formato: "whatsapp:+14155238886").
-// Aparece na tela "Try it out → Send a WhatsApp message" da Twilio.
-const TWILIO_WHATSAPP_DE = "whatsapp:+14155238886";
-
-// Seu número de WhatsApp, o que vai RECEBER os avisos.
-// Formato: "whatsapp:+55DDDNUMERO", ex: "whatsapp:+5591987654321".
-const MEU_WHATSAPP_PARA = "whatsapp:+55DDDNUMERO";
+// Seu chat_id no Telegram — o número que identifica sua conversa com
+// o bot (veja no passo a passo como pegar isso).
+const TELEGRAM_CHAT_ID = "COLE_AQUI_SEU_CHAT_ID";
 
 // --- Firebase (leitura dos dados) ---
 // ID do seu projeto Firebase (aparece no topo do Console, ex: "erp-credito").
@@ -137,28 +133,24 @@ function buscarRecebimentos_() {
 }
 
 // ------------------------------
-// ENVIAR MENSAGEM PELO WHATSAPP (Twilio)
+// ENVIAR MENSAGEM PELO TELEGRAM
 // ------------------------------
 
-function enviarWhatsApp_(mensagem) {
+function enviarTelegram_(mensagem) {
 
-    const url = "https://api.twilio.com/2010-04-01/Accounts/" + TWILIO_ACCOUNT_SID + "/Messages.json";
-
-    const credenciais = Utilities.base64Encode(TWILIO_ACCOUNT_SID + ":" + TWILIO_AUTH_TOKEN);
+    const url = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
 
     const resposta = UrlFetchApp.fetch(url, {
         method: "post",
         contentType: "application/x-www-form-urlencoded",
-        headers: { Authorization: "Basic " + credenciais },
         payload: {
-            From: TWILIO_WHATSAPP_DE,
-            To: MEU_WHATSAPP_PARA,
-            Body: mensagem
+            chat_id: TELEGRAM_CHAT_ID,
+            text: mensagem
         },
         muteHttpExceptions: true
     });
 
-    Logger.log("Twilio: " + resposta.getResponseCode() + " " + resposta.getContentText());
+    Logger.log("Telegram: " + resposta.getResponseCode() + " " + resposta.getContentText());
 
 }
 
@@ -188,7 +180,7 @@ function verificarParcelas() {
 
         if (item.vencimento === hojeISO) {
 
-            enviarWhatsApp_(
+            enviarTelegram_(
                 "🔔 Parcela vencendo hoje\n" +
                 "Cliente: " + item.cliente + "\n" +
                 "Contrato: " + item.contrato + "\n" +
@@ -197,7 +189,7 @@ function verificarParcelas() {
 
         } else if (item.status === "Atrasado") {
 
-            enviarWhatsApp_(
+            enviarTelegram_(
                 "⚠️ Parcela atrasada\n" +
                 "Cliente: " + item.cliente + "\n" +
                 "Contrato: " + item.contrato + "\n" +
