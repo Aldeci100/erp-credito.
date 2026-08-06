@@ -837,39 +837,27 @@ function formatarData(data){
 ====================================== */
 
 
+// O número do próximo contrato é calculado a partir dos contratos que
+// já existem (maior número encontrado + 1), não de um contador
+// separado — um contador guardado à parte (como era antes, na chave
+// "ultimoContratoERP") não é sincronizado entre computador e celular,
+// e cada aparelho passava a gerar números por conta própria, repetindo
+// contratos já existentes.
 function gerarNumeroContrato(){
 
+    const emprestimos = JSON.parse(localStorage.getItem("emprestimosERP")) || [];
 
-    let numero =
+    const maiorNumero = emprestimos.reduce(function (maior, item) {
 
-    localStorage.getItem(
+        const numero = parseInt(item.contrato, 10);
 
-        "ultimoContratoERP"
+        return !isNaN(numero) && numero > maior ? numero : maior;
 
-    ) || 0;
+    }, 0);
 
-
-
-    numero++;
-
-
-
-    localStorage.setItem(
-
-        "ultimoContratoERP",
-
-        numero
-
-    );
-
-
-
-    return numero
-
-    .toString()
-
-    .padStart(6,"0");
-
+    return (maiorNumero + 1)
+        .toString()
+        .padStart(6, "0");
 
 }
 
