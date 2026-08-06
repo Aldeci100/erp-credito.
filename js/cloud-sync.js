@@ -111,7 +111,12 @@ window.CloudSync = (function () {
     // NUVEM → LOCAL
     // ------------------------------
 
-    async function puxarDadosDaNuvem() {
+    // "forcar=true" ignora a proteção contra sobrescrever e traz o que
+    // estiver na nuvem de qualquer jeito — usado só no botão manual
+    // "Buscar dados da nuvem agora", onde é o próprio usuário pedindo
+    // explicitamente pra atualizar. A busca automática (ao abrir a
+    // página, e a checagem periódica) continua protegida.
+    async function puxarDadosDaNuvem(forcar) {
 
         if (!firebaseDb) return;
 
@@ -135,7 +140,7 @@ window.CloudSync = (function () {
                 // (ex: acabou de criar um contrato e a página já mudou)
                 // podia ser apagada por uma busca que chega logo depois
                 // trazendo a versão antiga da nuvem.
-                if (tsRemoto > tsLocal) {
+                if (forcar || tsRemoto > tsLocal) {
                     localStorage.setItem(doc.id, info.conteudo || "[]");
                     localStorage.setItem("_syncTs_" + doc.id, String(tsRemoto));
                 }
@@ -275,7 +280,7 @@ window.CloudSync = (function () {
             return;
         }
 
-        await puxarDadosDaNuvem();
+        await puxarDadosDaNuvem(true);
 
         alert("Dados atualizados a partir da nuvem.");
 
