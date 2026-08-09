@@ -19,7 +19,7 @@ body{
 
 .layout{
     display:flex;
-    min-height:100vh;
+    height:100vh;
 }
 
 /* ===========================
@@ -32,6 +32,11 @@ body{
     color:#fff;
     display:flex;
     flex-direction:column;
+    flex-shrink:0;
+    height:100vh;
+    overflow-y:auto;
+    position:sticky;
+    top:0;
 }
 
 .logo{
@@ -87,6 +92,8 @@ body{
 .content{
     flex:1;
     padding:35px;
+    height:100vh;
+    overflow-y:auto;
 }
 
 /* ===========================
@@ -404,12 +411,23 @@ grid-template-columns:1fr;
 .layout{
 
 flex-direction:column;
+height:auto;
 
 }
 
 .sidebar{
 
 width:100%;
+height:auto;
+position:static;
+overflow-y:visible;
+
+}
+
+.content{
+
+height:auto;
+overflow-y:visible;
 
 }
 

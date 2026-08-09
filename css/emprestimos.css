@@ -16,7 +16,7 @@ body{
 
 .layout{
     display:flex;
-    min-height:100vh;
+    height:100vh;
 }
 
 /* =====================================================
@@ -26,6 +26,8 @@ body{
 .content{
     flex:1;
     padding:30px;
+    height:100vh;
+    overflow-y:auto;
 }
 
 /* =====================================================

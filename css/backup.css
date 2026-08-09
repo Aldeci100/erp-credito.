@@ -13,7 +13,8 @@
 
     background:#f5f7fb;
 
-    min-height:100vh;
+    height:100vh;
+    overflow-y:auto;
 
 }
 
