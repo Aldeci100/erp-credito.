@@ -13,7 +13,46 @@ document.addEventListener("DOMContentLoaded", function () {
             atualizarRecebidoMes(mes);
             atualizarJurosAReceberMes(mes);
             atualizarJurosPorParceiro(mes);
-            atualizarJurosPorVencimentoMes(mes);
+
+        });
+
+    }
+
+    // Filtro de período (data início/fim) da tabela "por Vencimento da
+    // Parcela" — independente do filtro de mês acima, já que aqui faz
+    // sentido escolher um intervalo de datas, não só um mês fechado.
+    const filtroInicio = document.getElementById("filtroVencimentoInicio");
+    const filtroFim = document.getElementById("filtroVencimentoFim");
+    const btnMesAtual = document.getElementById("btnVencimentoMesAtual");
+
+    function aplicarFiltroVencimento() {
+
+        atualizarJurosPorVencimentoMes(filtroInicio.value, filtroFim.value);
+
+    }
+
+    if (filtroInicio && filtroFim) {
+
+        const hojeMes = obterHojeISO().slice(0, 7);
+
+        filtroInicio.value = primeiroDiaDoMes(hojeMes);
+        filtroFim.value = ultimoDiaDoMes(hojeMes);
+
+        filtroInicio.addEventListener("change", aplicarFiltroVencimento);
+        filtroFim.addEventListener("change", aplicarFiltroVencimento);
+
+    }
+
+    if (btnMesAtual) {
+
+        btnMesAtual.addEventListener("click", function () {
+
+            const hojeMes = obterHojeISO().slice(0, 7);
+
+            filtroInicio.value = primeiroDiaDoMes(hojeMes);
+            filtroFim.value = ultimoDiaDoMes(hojeMes);
+
+            aplicarFiltroVencimento();
 
         });
 
@@ -35,6 +74,9 @@ function atualizarDashboard() {
     const filtroMes = document.getElementById("filtroMesDashboard");
     const mesSelecionado = filtroMes?.value || obterHojeISO().slice(0, 7);
 
+    const filtroInicio = document.getElementById("filtroVencimentoInicio");
+    const filtroFim = document.getElementById("filtroVencimentoFim");
+
     atualizarCardClientes(clientes);
 atualizarCardParceiros(parceiros);
 atualizarCapitalEmprestado(emprestimos);
@@ -44,7 +86,7 @@ atualizarReceberHoje(recebimentos);
 atualizarRecebidoMes(mesSelecionado);
 atualizarJurosAReceberMes(mesSelecionado);
 atualizarJurosPorParceiro(mesSelecionado);
-atualizarJurosPorVencimentoMes(mesSelecionado);
+atualizarJurosPorVencimentoMes(filtroInicio?.value, filtroFim?.value);
 atualizarComissaoParceiros(emprestimos, parceiros);
 atualizarContratosAtrasados(recebimentos);
 atualizarAtrasados(recebimentos);
@@ -389,15 +431,41 @@ function atualizarJurosPorParceiro(mesFiltro){
 
 }
 
+// "aaaa-mm" -> "aaaa-mm-01" (primeiro dia daquele mês).
+function primeiroDiaDoMes(mesISO) {
+
+    return mesISO + "-01";
+
+}
+
+// "aaaa-mm" -> último dia daquele mês, em ISO ("aaaa-mm-dd").
+function ultimoDiaDoMes(mesISO) {
+
+    const [ano, mes] = mesISO.split("-").map(Number);
+
+    // Dia 0 do mês seguinte = último dia do mês atual.
+    const data = new Date(ano, mes, 0);
+
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mesTxt = String(mes).padStart(2, "0");
+
+    return `${ano}-${mesTxt}-${dia}`;
+
+}
+
 // Igual a "Juros por Parceiro", mas com o critério que o usuário pediu:
 // olha a data de VENCIMENTO de cada parcela em recebimentosERP, e só
-// entram as que vencem dentro do mês selecionado — não importa se já
-// foram pagas ou não, nem se o contrato continua ativo depois. É um
-// recorte diferente do card/tabela por "contrato ativo": aqui é
-// literalmente "quanto de juros tem parcela vencendo neste mês".
-function atualizarJurosPorVencimentoMes(mesFiltro){
+// entram as que vencem dentro do período (data início/fim) escolhido —
+// não importa se já foram pagas ou não, nem se o contrato continua
+// ativo depois. É um recorte diferente do card/tabela por "contrato
+// ativo": aqui é literalmente "quanto de juros tem parcela vencendo
+// nesse período", podendo ser um único mês ou vários.
+function atualizarJurosPorVencimentoMes(dataInicio, dataFim){
 
-    const mesAlvo = mesFiltro || obterHojeISO().slice(0, 7);
+    const hojeMes = obterHojeISO().slice(0, 7);
+
+    const inicioAlvo = dataInicio || primeiroDiaDoMes(hojeMes);
+    const fimAlvo = dataFim || ultimoDiaDoMes(hojeMes);
 
     const recebimentos = carregar("recebimentosERP");
     const emprestimos = carregar("emprestimosERP");
@@ -419,7 +487,7 @@ function atualizarJurosPorVencimentoMes(mesFiltro){
 
     recebimentos.forEach(function (item) {
 
-        if (!item.vencimento || item.vencimento.slice(0, 7) !== mesAlvo) return;
+        if (!item.vencimento || item.vencimento < inicioAlvo || item.vencimento > fimAlvo) return;
 
         // Parcela Quitada ou "Parcelado": usa o juros já gravado (fixo).
         // Parcela em aberto do modelo rotativo: recalcula na hora a
@@ -482,7 +550,7 @@ function atualizarJurosPorVencimentoMes(mesFiltro){
             tbody.innerHTML = `
                 <tr>
                     <td colspan="4" style="text-align:center; padding:14px;">
-                        Nenhuma parcela vencendo neste mês.
+                        Nenhuma parcela vencendo neste período.
                     </td>
                 </tr>
             `;
