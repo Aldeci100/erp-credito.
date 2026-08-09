@@ -3,6 +3,11 @@
    MÓDULO RECEBIMENTOS
 ====================================================== */
 
+// Ordenação da tabela por clique no cabeçalho: "campo" é a coluna atual
+// (null = ordem padrão, do jeito que já vem do armazenamento) e
+// "direcao" é 1 (crescente) ou -1 (decrescente).
+let ordenacaoAtual = { campo: null, direcao: 1 };
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("RECEBIMENTOS.JS CARREGADO");
     const modal = document.getElementById("modalRecebimento");
@@ -553,6 +558,38 @@ localStorage.setItem(
     });
 
     /*=========================================
+      ORDENAR AO CLICAR NO CABEÇALHO
+    =========================================*/
+
+    document.addEventListener("click", function (e) {
+
+        const th = e.target.closest("th.ordenavel");
+
+        if (!th) return;
+
+        const campo = th.dataset.sort;
+
+        if (ordenacaoAtual.campo === campo) {
+            ordenacaoAtual.direcao *= -1;
+        } else {
+            ordenacaoAtual = { campo: campo, direcao: 1 };
+        }
+
+        document.querySelectorAll("th.ordenavel").forEach(function (cabecalho) {
+
+            cabecalho.classList.remove("asc", "desc");
+
+            if (cabecalho === th) {
+                cabecalho.classList.add(ordenacaoAtual.direcao === 1 ? "asc" : "desc");
+            }
+
+        });
+
+        carregarRecebimentos();
+
+    });
+
+    /*=========================================
       BOTÕES DA TABELA
     =========================================*/
 
@@ -1009,6 +1046,52 @@ function passaNoFiltroRecebimento(item) {
 }
 
 /*=========================================
+  VALOR USADO PARA ORDENAR CADA COLUNA
+  (mesma lógica de exibição de criarLinhaRecebimento,
+  pra ordenar pelo valor que o usuário está vendo)
+=========================================*/
+
+function valorOrdenacao(item, campo) {
+
+    switch (campo) {
+
+        case "contrato":
+            return Number(item.contrato) || 0;
+
+        case "cliente":
+            return (item.cliente || "").toLowerCase();
+
+        case "parceiro":
+            return (item.parceiro || "").toLowerCase();
+
+        case "vencimento":
+            return item.vencimento || "";
+
+        case "saldoDevedor":
+            return Number(item.saldoDevedor || 0);
+
+        case "juros":
+            return (item.status === "Quitado" || item.tipoJuros === "Parcelado")
+                ? Number(item.valorJuros || 0)
+                : jurosAtualDaParcela(item);
+
+        case "valorParcela":
+            return Number(item.valorParcela || 0);
+
+        case "diasAtraso":
+            return item.status === "Atrasado" ? calcularDiasAtraso(item.vencimento) : -1;
+
+        case "status":
+            return (item.status || "").toLowerCase();
+
+        default:
+            return "";
+
+    }
+
+}
+
+/*=========================================
   LINHA DA TABELA (com suporte a agrupamento
   de parcelas do mesmo contrato)
 =========================================*/
@@ -1133,6 +1216,31 @@ function carregarRecebimentos() {
         grupos[indicePorContrato[item.contrato]].parcelas.push(item);
 
     });
+
+    // Ordena pelo cabeçalho clicado, comparando pela parcela "principal"
+    // de cada contrato (a mesma que aparece na linha visível da tabela).
+    if (ordenacaoAtual.campo && !window.contratoFiltro) {
+
+        grupos.forEach(function (grupo) {
+
+            grupo.principal =
+                grupo.parcelas.find(p => p.status !== "Quitado") ||
+                grupo.parcelas[grupo.parcelas.length - 1];
+
+        });
+
+        grupos.sort(function (a, b) {
+
+            const valorA = valorOrdenacao(a.principal, ordenacaoAtual.campo);
+            const valorB = valorOrdenacao(b.principal, ordenacaoAtual.campo);
+
+            if (valorA < valorB) return -1 * ordenacaoAtual.direcao;
+            if (valorA > valorB) return 1 * ordenacaoAtual.direcao;
+            return 0;
+
+        });
+
+    }
 
     grupos.forEach(function (grupo) {
 
