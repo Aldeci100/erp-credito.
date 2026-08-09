@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             atualizarRecebidoMes(mes);
             atualizarJurosAReceberMes(mes);
             atualizarJurosPorParceiro(mes);
+            atualizarJurosPorVencimentoMes(mes);
 
         });
 
@@ -43,6 +44,7 @@ atualizarReceberHoje(recebimentos);
 atualizarRecebidoMes(mesSelecionado);
 atualizarJurosAReceberMes(mesSelecionado);
 atualizarJurosPorParceiro(mesSelecionado);
+atualizarJurosPorVencimentoMes(mesSelecionado);
 atualizarComissaoParceiros(emprestimos, parceiros);
 atualizarContratosAtrasados(recebimentos);
 atualizarAtrasados(recebimentos);
@@ -380,6 +382,136 @@ function atualizarJurosPorParceiro(mesFiltro){
     const elTotal = document.getElementById("totalJurosPorParceiroTotal");
     const elDono = document.getElementById("totalJurosPorParceiroDono");
     const elParceiro = document.getElementById("totalJurosPorParceiroParceiro");
+
+    if (elTotal) elTotal.textContent = formatarMoeda(totalGeral);
+    if (elDono) elDono.textContent = formatarMoeda(donoGeral);
+    if (elParceiro) elParceiro.textContent = formatarMoeda(parceiroGeral);
+
+}
+
+// Igual a "Juros por Parceiro", mas com o critério que o usuário pediu:
+// olha a data de VENCIMENTO de cada parcela em recebimentosERP, e só
+// entram as que vencem dentro do mês selecionado — não importa se já
+// foram pagas ou não, nem se o contrato continua ativo depois. É um
+// recorte diferente do card/tabela por "contrato ativo": aqui é
+// literalmente "quanto de juros tem parcela vencendo neste mês".
+function atualizarJurosPorVencimentoMes(mesFiltro){
+
+    const mesAlvo = mesFiltro || obterHojeISO().slice(0, 7);
+
+    const recebimentos = carregar("recebimentosERP");
+    const emprestimos = carregar("emprestimosERP");
+    const parceiros = carregar("parceirosERP");
+
+    const grupos = {};
+
+    function grupoDe(chave, nome) {
+
+        if (!grupos[chave]) {
+            grupos[chave] = { nome, total: 0, dono: 0, parceiro: 0 };
+        }
+
+        return grupos[chave];
+
+    }
+
+    let totalGeral = 0, donoGeral = 0, parceiroGeral = 0;
+
+    recebimentos.forEach(function (item) {
+
+        if (!item.vencimento || item.vencimento.slice(0, 7) !== mesAlvo) return;
+
+        // Parcela Quitada ou "Parcelado": usa o juros já gravado (fixo).
+        // Parcela em aberto do modelo rotativo: recalcula na hora a
+        // partir do saldo devedor, igual a tela de Recebimentos exibe.
+        const jurosParcela = (item.status === "Quitado" || item.tipoJuros === "Parcelado")
+            ? Number(item.valorJuros || 0)
+            : jurosAtualDaParcela(item);
+
+        const emprestimo = emprestimos.find(e => e.contrato === item.contrato);
+
+        const parceiro = item.parceiro
+            ? parceiros.find(p => nomesIguais(p.nome, item.parceiro))
+            : null;
+
+        let jurosParceiroValor = 0;
+
+        if (emprestimo && parceiro) {
+
+            // Mesma regra de "jurosParceiroContrato": o percentual incide
+            // sobre o saldo devedor (aqui, o saldo daquela parcela
+            // específica — em contratos "Parcelado" ele já vai caindo a
+            // cada parcela), nunca mais que o juros que a própria parcela
+            // gera.
+            const percentual = percentualComissaoContrato(emprestimo, parceiro);
+            const bruto = Number(item.saldoDevedor || 0) * (percentual / 100);
+            jurosParceiroValor = Math.min(bruto, jurosParcela);
+
+        }
+
+        const jurosDono = Math.max(jurosParcela - jurosParceiroValor, 0);
+
+        const chave = parceiro
+            ? String(parceiro.nome).trim().toLowerCase()
+            : "__sem_parceiro__";
+
+        const nomeExibido = parceiro ? parceiro.nome : "— Sem parceiro —";
+
+        const grupo = grupoDe(chave, nomeExibido);
+
+        grupo.total += jurosParcela;
+        grupo.dono += jurosDono;
+        grupo.parceiro += jurosParceiroValor;
+
+        totalGeral += jurosParcela;
+        donoGeral += jurosDono;
+        parceiroGeral += jurosParceiroValor;
+
+    });
+
+    const tbody = document.getElementById("listaJurosPorParceiroVencimento");
+
+    if (tbody) {
+
+        const linhas = Object.values(grupos).sort((a, b) => b.total - a.total);
+
+        tbody.innerHTML = "";
+
+        if (linhas.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" style="text-align:center; padding:14px;">
+                        Nenhuma parcela vencendo neste mês.
+                    </td>
+                </tr>
+            `;
+
+        } else {
+
+            linhas.forEach(function (l) {
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="padding:10px;">${l.nome}</td>
+                        <td style="padding:10px; text-align:right;">${formatarMoeda(l.total)}</td>
+                        <td style="padding:10px; text-align:right;">${formatarMoeda(l.dono)}</td>
+                        <td style="padding:10px; text-align:right;">${formatarMoeda(l.parceiro)}</td>
+                    </tr>
+                `;
+
+            });
+
+        }
+
+    }
+
+    const card = document.getElementById("cardJurosVencimentoMes");
+    if (card) card.textContent = formatarMoeda(donoGeral);
+
+    const elTotal = document.getElementById("totalJurosVencimentoTotal");
+    const elDono = document.getElementById("totalJurosVencimentoDono");
+    const elParceiro = document.getElementById("totalJurosVencimentoParceiro");
 
     if (elTotal) elTotal.textContent = formatarMoeda(totalGeral);
     if (elDono) elDono.textContent = formatarMoeda(donoGeral);

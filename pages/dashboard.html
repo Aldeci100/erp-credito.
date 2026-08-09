@@ -181,6 +181,20 @@
 
 </div>
 
+            <div class="card laranja" title="Sua parte dos juros (já descontada a comissão dos parceiros), somando SOMENTE as parcelas cuja data de vencimento cai dentro do mês selecionado — independente de status">
+
+    <div>
+
+        <h3>Juros por Vencimento no Mês (Dono)</h3>
+
+        <h2 id="cardJurosVencimentoMes">R$ 0,00</h2>
+
+    </div>
+
+    <i class="fa-solid fa-calendar-check"></i>
+
+</div>
+
             <div class="card roxo clicavel" onclick="location.href='parceiros.html'" title="Soma das comissões de todos os parceiros que ainda não foram dadas baixa (pendentes + atrasadas)">
 
     <div>
@@ -275,6 +289,55 @@
                             <td style="padding:10px; text-align:right;" id="totalJurosPorParceiroTotal">R$ 0,00</td>
                             <td style="padding:10px; text-align:right;" id="totalJurosPorParceiroDono">R$ 0,00</td>
                             <td style="padding:10px; text-align:right;" id="totalJurosPorParceiroParceiro">R$ 0,00</td>
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- JUROS POR PARCEIRO NO MÊS (POR VENCIMENTO DA PARCELA) -->
+
+        <section class="panel grande" style="margin-bottom:25px;">
+
+            <h2>
+                <i class="fa-solid fa-calendar-check"></i>
+                Juros do Mês por Parceiro (por Vencimento da Parcela)
+            </h2>
+
+            <p style="color:#6b7280; font-size:14px; margin-top:-6px; margin-bottom:12px;">
+                Considera só as parcelas cujo vencimento cai dentro do mês selecionado acima — diferente da tabela anterior, que considera todo contrato ainda aberto naquele mês.
+            </p>
+
+            <div style="overflow-x:auto;">
+
+                <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+
+                    <thead>
+
+                        <tr>
+                            <th style="padding:10px; text-align:left; background:#1e3a8a; color:#fff;">Parceiro</th>
+                            <th style="padding:10px; text-align:right; background:#1e3a8a; color:#fff;">Juros Total no Mês</th>
+                            <th style="padding:10px; text-align:right; background:#1e3a8a; color:#fff;">Juros do Dono</th>
+                            <th style="padding:10px; text-align:right; background:#1e3a8a; color:#fff;">Juros do Parceiro</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="listaJurosPorParceiroVencimento">
+
+                    </tbody>
+
+                    <tfoot>
+
+                        <tr style="font-weight:bold; border-top:2px solid #1e3a8a;">
+                            <td style="padding:10px;">Total geral</td>
+                            <td style="padding:10px; text-align:right;" id="totalJurosVencimentoTotal">R$ 0,00</td>
+                            <td style="padding:10px; text-align:right;" id="totalJurosVencimentoDono">R$ 0,00</td>
+                            <td style="padding:10px; text-align:right;" id="totalJurosVencimentoParceiro">R$ 0,00</td>
                         </tr>
 
                     </tfoot>
