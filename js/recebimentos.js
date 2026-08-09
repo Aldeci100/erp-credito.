@@ -377,15 +377,23 @@ const dataPagamento = document.getElementById("dataPagamento").value || obterHoj
 
             const taxa = Number(item.taxaJuros) || 0;
 
+            // Contratos "Parcelado" têm juros fixo por parcela — o valor
+            // já gravado é o registro histórico correto do que foi
+            // cobrado nessa parcela, não recalcula sobre o saldo.
+            if (item.tipoJuros !== "Parcelado") {
                 item.valorJuros =
                     novoSaldoCalculado * (taxa / 100);
+            }
 
             // A parcela que acabou de receber o pagamento sempre fica quitada;
             // se ainda houver saldo devedor do contrato, uma nova parcela
-            // "Pendente" é gerada abaixo para o próximo vencimento.
+            // "Pendente" é gerada abaixo para o próximo vencimento — exceto
+            // em contratos "Parcelado", onde todas as parcelas já foram
+            // criadas de uma vez no cadastro do contrato, não há "próxima"
+            // pra gerar.
             item.status = "Quitado";
 
-                   if (novoSaldoCalculado > 0) {
+                   if (novoSaldoCalculado > 0 && item.tipoJuros !== "Parcelado") {
 
     const data = new Date(item.vencimento + "T00:00:00");
 
@@ -1044,8 +1052,10 @@ function criarLinhaRecebimento(item, opcoes) {
     // devedor atual (nunca confia no campo gravado, que só atualiza a
     // cada pagamento). Parcelas já Quitadas mantêm o valor gravado no
     // momento da baixa, que é o registro histórico correto daquele
-    // pagamento.
-    const jurosExibido = item.status === "Quitado"
+    // pagamento. Contratos "Parcelado" fogem dessa regra: o juros é
+    // fixo por parcela (não recalculado sobre o saldo, que só serve
+    // aqui pra controlar a amortização) — usa sempre o valor gravado.
+    const jurosExibido = (item.status === "Quitado" || item.tipoJuros === "Parcelado")
         ? Number(item.valorJuros || 0)
         : jurosAtualDaParcela(item);
 
@@ -1169,8 +1179,15 @@ function atualizarCardsRecebimentos(){
     const recebimentos =
         JSON.parse(localStorage.getItem("recebimentosERP")) || [];
 
-    let total = 0;
-    let contratosPendentes = 0;
+    // Contratos "Parcelado" podem ter várias parcelas abertas ao mesmo
+    // tempo (cada uma já criada desde o cadastro), cada uma com o saldo
+    // devedor daquele ponto do cronograma — soma só a maior por
+    // contrato (a parcela mais antiga ainda aberta), que já representa
+    // o principal total restante daquele contrato, pra não contar o
+    // mesmo capital várias vezes. Em contratos rotativos (só 1 parcela
+    // aberta por vez) isso dá o mesmo resultado de antes.
+    const saldoPorContrato = {};
+    const contratosComPendente = new Set();
     let parcelasVencidas = 0;
 
     recebimentos.forEach(function(item){
@@ -1181,13 +1198,17 @@ function atualizarCardsRecebimentos(){
         // que alguma parcela vencia.
         if(item.status === "Pendente" || item.status === "Atrasado"){
 
-            total += Number(item.saldoDevedor || 0);
+            const saldo = Number(item.saldoDevedor || 0);
+
+            if (!(item.contrato in saldoPorContrato) || saldo > saldoPorContrato[item.contrato]) {
+                saldoPorContrato[item.contrato] = saldo;
+            }
 
         }
 
         if(item.status === "Pendente"){
 
-            contratosPendentes++;
+            contratosComPendente.add(item.contrato);
 
         }
 
@@ -1199,11 +1220,13 @@ function atualizarCardsRecebimentos(){
 
     });
 
+    const total = Object.values(saldoPorContrato).reduce((soma, v) => soma + v, 0);
+
     document.getElementById("cardTotalReceber").innerHTML =
         moeda(total);
 
     document.getElementById("cardContratosPendentes").innerHTML =
-        contratosPendentes;
+        contratosComPendente.size;
 
     document.getElementById("cardParcelasVencidas").innerHTML =
         parcelasVencidas;

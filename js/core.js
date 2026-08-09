@@ -293,6 +293,11 @@ function gerarParcelasEmAtraso(hojeISO){
         // Contrato quitado/inativo não gera parcela nova.
         if (emprestimo && emprestimo.status === "Quitado") return;
 
+        // Contratos "Parcelado" já têm todas as parcelas criadas de uma
+        // vez no cadastro — não existe "próxima parcela" pra gerar
+        // automaticamente quando uma delas atrasa.
+        if (emprestimo && emprestimo.tipoJuros === "Parcelado") return;
+
         const abertas = recebimentos.filter(
             r => r.contrato === contrato && r.status !== "Quitado"
         );

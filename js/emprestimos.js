@@ -396,9 +396,69 @@ renderizarTabelaEmprestimos();
 
     let recebimentos = carregar("recebimentosERP");
 
-    if (!editando) {
+    if (!editando && dados.tipoJuros === "Parcelado") {
 
-        // Contrato novo: cria a primeira parcela normalmente.
+        // Contrato "Parcelado": em vez de 1 parcela rotativa (juros
+        // recalculado sobre o saldo que vai caindo), gera as N parcelas
+        // de uma vez, cada uma com o MESMO valor de juros fixo (valor
+        // original × taxa) e a mesma amortização (valor / parcelas) —
+        // exatamente a conta que já existia em calcularJuros() pro caso
+        // "Simples", só que agora de fato virando parcelas reais.
+        const numParcelas = Number(dados.parcelas) || 1;
+        const jurosFixoPorParcela = dados.valor * (dados.juros / 100);
+        const amortizacaoFixaPorParcela = dados.valor / numParcelas;
+
+        let saldoRestante = dados.valor;
+        let dataVencimento = new Date(dados.primeiroVencimento + "T00:00:00");
+
+        for (let i = 1; i <= numParcelas; i++) {
+
+            recebimentos.push({
+
+                id: gerarId(),
+                contrato: dados.contrato,
+                cliente: dados.cliente,
+                parceiro: dados.parceiro,
+                vencimento: paraISOLocal(dataVencimento),
+                saldoDevedor: saldoRestante,
+                taxaJuros: dados.juros,
+                valorJuros: jurosFixoPorParcela,
+                valorParcela: jurosFixoPorParcela + amortizacaoFixaPorParcela,
+                tipoJuros: "Parcelado",
+                numeroParcela: i,
+                totalParcelas: numParcelas,
+                status: "Pendente"
+
+            });
+
+            saldoRestante -= amortizacaoFixaPorParcela;
+
+            switch (dados.periodicidade) {
+
+                case "Diário":
+                    dataVencimento.setDate(dataVencimento.getDate() + 1);
+                    break;
+
+                case "Semanal":
+                    dataVencimento.setDate(dataVencimento.getDate() + 7);
+                    break;
+
+                case "Quinzenal":
+                    dataVencimento.setDate(dataVencimento.getDate() + 15);
+                    break;
+
+                default:
+                    dataVencimento.setMonth(dataVencimento.getMonth() + 1);
+
+            }
+
+        }
+
+        localStorage.setItem("recebimentosERP", JSON.stringify(recebimentos));
+
+    } else if (!editando) {
+
+        // Contrato novo (modelo rotativo): cria a primeira parcela normalmente.
         recebimentos.push({
 
             id: gerarId(),
