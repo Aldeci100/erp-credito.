@@ -1059,6 +1059,14 @@ function criarLinhaRecebimento(item, opcoes) {
         ? Number(item.valorJuros || 0)
         : jurosAtualDaParcela(item);
 
+    // Só existe um "valor de parcela" fixo em contratos "Parcelado"
+    // (capital + juros já somados). No modelo rotativo, o que se cobra
+    // por mês já é o próprio juros (coluna "Juros do Mês") — não tem
+    // um valor separado pra mostrar aqui.
+    const valorParcelaExibido = item.tipoJuros === "Parcelado"
+        ? moeda(Number(item.valorParcela || 0))
+        : "-";
+
     return `
         <tr class="${classeLinha}" ${atributos.join(" ")}>
             <td>${toggle}${item.contrato}</td>
@@ -1067,6 +1075,7 @@ function criarLinhaRecebimento(item, opcoes) {
             <td>${formatarData(item.vencimento)}</td>
             <td>${moeda(Number(item.saldoDevedor || 0))}</td>
             <td>${moeda(jurosExibido)}</td>
+            <td>${valorParcelaExibido}</td>
             <td>${diasAtraso}</td>
             <td>
                 <span class="status ${statusClasse}">${item.status}</span>

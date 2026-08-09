@@ -409,7 +409,19 @@ renderizarTabelaEmprestimos();
         const amortizacaoFixaPorParcela = dados.valor / numParcelas;
 
         let saldoRestante = dados.valor;
-        let dataVencimento = new Date(dados.primeiroVencimento + "T00:00:00");
+
+        // "Primeiro Vencimento" não é obrigatório no formulário — sem
+        // essa proteção, um contrato criado sem preencher esse campo
+        // gerava parcelas com data inválida ("NaN/NaN/NaN" na tela).
+        // Cai pra "Data do Contrato" e, na falta dela também, pra hoje.
+        const primeiroVencimentoValido =
+            dados.primeiroVencimento || dados.dataContrato || obterHojeISO();
+
+        let dataVencimento = new Date(primeiroVencimentoValido + "T00:00:00");
+
+        if (isNaN(dataVencimento.getTime())) {
+            dataVencimento = new Date(obterHojeISO() + "T00:00:00");
+        }
 
         for (let i = 1; i <= numParcelas; i++) {
 
