@@ -489,14 +489,35 @@ function atualizarJurosPorVencimentoMes(dataInicio, dataFim){
 
         if (!item.vencimento || item.vencimento < inicioAlvo || item.vencimento > fimAlvo) return;
 
-        // Parcela Quitada ou "Parcelado": usa o juros já gravado (fixo).
-        // Parcela em aberto do modelo rotativo: recalcula na hora a
-        // partir do saldo devedor, igual a tela de Recebimentos exibe.
-        const jurosParcela = (item.status === "Quitado" || item.tipoJuros === "Parcelado")
-            ? Number(item.valorJuros || 0)
-            : jurosAtualDaParcela(item);
-
         const emprestimo = emprestimos.find(e => e.contrato === item.contrato);
+
+        // Parcela Quitada ou "Parcelado": usa o saldo/juros já gravado na
+        // própria parcela (fixo, é um registro histórico daquele momento).
+        // Parcela em aberto do modelo rotativo: usa o saldo ATUAL do
+        // contrato (mesma fonte da tabela "por contrato ativo"), não o
+        // que ficou gravado na parcela quando ela foi gerada — se o saldo
+        // do contrato mudar depois (um pagamento parcial, um ajuste), a
+        // parcela auto-gerada pra cobrir o atraso fica desatualizada e as
+        // duas tabelas passam a divergir sem motivo.
+        let baseParaComissao;
+        let jurosParcela;
+
+        if (item.status === "Quitado" || item.tipoJuros === "Parcelado") {
+
+            baseParaComissao = Number(item.saldoDevedor || 0);
+            jurosParcela = Number(item.valorJuros || 0);
+
+        } else if (emprestimo) {
+
+            baseParaComissao = baseComissao(emprestimo);
+            jurosParcela = baseParaComissao * (Number(emprestimo.juros || 0) / 100);
+
+        } else {
+
+            baseParaComissao = Number(item.saldoDevedor || 0);
+            jurosParcela = jurosAtualDaParcela(item);
+
+        }
 
         const parceiro = item.parceiro
             ? parceiros.find(p => nomesIguais(p.nome, item.parceiro))
@@ -507,12 +528,10 @@ function atualizarJurosPorVencimentoMes(dataInicio, dataFim){
         if (emprestimo && parceiro) {
 
             // Mesma regra de "jurosParceiroContrato": o percentual incide
-            // sobre o saldo devedor (aqui, o saldo daquela parcela
-            // específica — em contratos "Parcelado" ele já vai caindo a
-            // cada parcela), nunca mais que o juros que a própria parcela
-            // gera.
+            // sobre o saldo (nunca mais que o juros que a própria parcela
+            // gera).
             const percentual = percentualComissaoContrato(emprestimo, parceiro);
-            const bruto = Number(item.saldoDevedor || 0) * (percentual / 100);
+            const bruto = baseParaComissao * (percentual / 100);
             jurosParceiroValor = Math.min(bruto, jurosParcela);
 
         }
