@@ -471,13 +471,26 @@ renderizarTabelaEmprestimos();
     } else if (!editando) {
 
         // Contrato novo (modelo rotativo): cria a primeira parcela normalmente.
+        // "Primeiro Vencimento" não é obrigatório no formulário — sem essa
+        // proteção, um contrato criado sem preencher esse campo gerava
+        // parcela com vencimento vazio, que depois some de qualquer tela
+        // que filtre por data de vencimento.
+        const primeiroVencimentoValido =
+            dados.primeiroVencimento || dados.dataContrato || obterHojeISO();
+
+        let dataVencimentoInicial = new Date(primeiroVencimentoValido + "T00:00:00");
+
+        if (isNaN(dataVencimentoInicial.getTime())) {
+            dataVencimentoInicial = new Date(obterHojeISO() + "T00:00:00");
+        }
+
         recebimentos.push({
 
             id: gerarId(),
             contrato: dados.contrato,
             cliente: dados.cliente,
             parceiro: dados.parceiro,
-            vencimento: dados.primeiroVencimento,
+            vencimento: paraISOLocal(dataVencimentoInicial),
             saldoDevedor: dados.saldoDevedor || dados.valor,
             taxaJuros: dados.juros,
             valorJuros: (dados.saldoDevedor || dados.valor) * (dados.juros / 100),
@@ -526,13 +539,22 @@ renderizarTabelaEmprestimos();
 
         } else {
 
+            const primeiroVencimentoValido =
+                dados.primeiroVencimento || dados.dataContrato || obterHojeISO();
+
+            let dataVencimentoNova = new Date(primeiroVencimentoValido + "T00:00:00");
+
+            if (isNaN(dataVencimentoNova.getTime())) {
+                dataVencimentoNova = new Date(obterHojeISO() + "T00:00:00");
+            }
+
             recebimentos.push({
 
                 id: gerarId(),
                 contrato: dados.contrato,
                 cliente: dados.cliente,
                 parceiro: dados.parceiro,
-                vencimento: dados.primeiroVencimento,
+                vencimento: paraISOLocal(dataVencimentoNova),
                 saldoDevedor: saldoAtual,
                 taxaJuros: dados.juros,
                 valorJuros: saldoAtual * (dados.juros / 100),

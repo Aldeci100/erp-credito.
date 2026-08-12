@@ -346,12 +346,60 @@ function gerarParcelasEmAtraso(hojeISO){
 
 }
 
+// Corrige parcelas com vencimento vazio/inválido — bug antigo de
+// contratos criados sem o campo "Primeiro Vencimento" preenchido (não é
+// obrigatório no formulário). Sem essa correção, a parcela some de
+// qualquer tela que filtre por vencimento (ex: "Juros por Vencimento no
+// Mês" do Dashboard), mesmo o contrato aparecendo normalmente em outras
+// telas. Usa o "Primeiro Vencimento" gravado no contrato como fonte da
+// data certa — inclusive quando ele foi corrigido DEPOIS que a parcela
+// já tinha sido criada (editar o contrato não atualiza parcelas já
+// abertas automaticamente).
+function corrigirVencimentosInvalidos(){
+
+    const recebimentos = JSON.parse(localStorage.getItem("recebimentosERP")) || [];
+    const emprestimos = JSON.parse(localStorage.getItem("emprestimosERP")) || [];
+
+    let houveMudanca = false;
+
+    recebimentos.forEach(function(item){
+
+        const dataValida =
+            item.vencimento &&
+            !isNaN(new Date(item.vencimento + "T00:00:00").getTime());
+
+        if (dataValida) return;
+
+        const emprestimo = emprestimos.find(e => e.contrato === item.contrato);
+
+        const candidato =
+            (emprestimo && (emprestimo.primeiroVencimento || emprestimo.dataContrato)) ||
+            obterHojeISO();
+
+        const dataCandidata = new Date(candidato + "T00:00:00");
+
+        item.vencimento = isNaN(dataCandidata.getTime())
+            ? obterHojeISO()
+            : paraISOLocal(dataCandidata);
+
+        houveMudanca = true;
+
+    });
+
+    if (houveMudanca) {
+        localStorage.setItem("recebimentosERP", JSON.stringify(recebimentos));
+    }
+
+}
+
 function atualizarStatusRecebimentos(){
 
     // Comparação por string "aaaa-mm-dd" (não usar new Date(string), que
     // sofre deslocamento de fuso horário e pode marcar uma parcela como
     // atrasada um dia antes ou depois da data real).
     const hojeISO = obterHojeISO();
+
+    corrigirVencimentosInvalidos();
 
     gerarParcelasEmAtraso(hojeISO);
 
